@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Livre d'or{% endblock %}
+
+{% block body %}
+		<div class="avis-form">
+			{{ form_start(form) }}
+                {{ form_row(form.username) }}
+                {# {{ form_row(form.avisClients) }} #}
+                <button class="btn">{{ button_label|default('Envoyer') }}</button>
+			{{ form_end(form) }}
+		</div>
+{% endblock %}

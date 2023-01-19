@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes Réservations
+{% endblock %}
+
+{% block body %}
+	<div class="reservation-list-container">
+		<h1>Mes Réservations</h1>
+		<a href="{{ path('app_profil') }}">Retour</a>
+		<div class="reservation-list-content">
+			<div class="header-list">
+				<div class="nbrReservation-container">
+					<p>Nombre de réservation</p>
+					<div class="nbrReservation"><p></p></div>
+				</div>
+				<div class="box-list">
+					<div class="box" id="en-cours"><p>En cours de validation</p></div>
+					<div class="box" id="valide"><p>Validée</p></div>
+					<div class="box" id="refus"><p>Refusée</p></div>
+					<div class="box" id="annule"><p>Annulée</p></div>
+				</div>
+			</div>
+			<div class="reservation-list">
+				<div class="reservation-row">
+					<div class="box" id="nom"></div>
+					<div class="box" id="date"><p>Réservation du</p></div>
+					<div class="box" id="statut"></div>
+					<a href="#">
+						<i class="fa-solid fa-pen"></i>
+					</a>
+					<a href="#">
+						<i class="fa-solid fa-star"></i>
+					</a>
+				</div>
+				<div class="reservation-row">
+					<div class="box" id="nom"></div>
+					<div class="box" id="date"><p>Réservation du</p></div>
+					<div class="box" id="statut"></div>
+					<a href="#">
+						<i class="fa-solid fa-pen"></i>
+					</a>
+					<a href="#">
+						<i class="fa-solid fa-star"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

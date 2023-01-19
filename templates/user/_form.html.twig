@@ -1,0 +1,19 @@
+{{ form_start(form, { 'attr' : { 'class': 'user-form-container' } }) }}
+<div class="user-form-content">
+    <h2>Informations personnelles</h2>
+    <div class="row">
+        {{ form_row(form.nom) }}
+        {{ form_row(form.prenom) }}
+     </div>
+     {{ form_row(form.adresse) }}
+     <div class="row">
+        {{ form_row(form.codePostal) }}
+        {{ form_row(form.ville) }}
+     </div>
+     <div class="row">
+        {{ form_row(form.email) }}
+        {{ form_row(form.telephone) }}
+     </div>
+    <button class="btn">{{ button_label|default('Enregistrer les modifications') }}</button>
+</div>
+{{ form_end(form) }}

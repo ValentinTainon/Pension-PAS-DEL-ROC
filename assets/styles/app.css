@@ -1,0 +1,756 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #FBFEF9;
+}
+
+nav,
+footer {
+    width: 100vw;
+    height: 10vh;
+    position: fixed;
+    background-color: #1C3144;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+nav {
+    top: 0;
+}
+
+footer {
+    bottom: 0;
+}
+
+nav>a, footer>a, footer>p{
+    font-size: 20px;
+    color: #FBFEF9;
+    text-decoration: none;
+}
+/* ALERTES */
+.alert{
+    width: 100%;
+    position: fixed;
+    text-align: center;
+}
+
+.alert-success{
+    background-color: green;
+}
+
+.alert-danger{
+    background-color: red;
+}
+
+/* ACCUEIL */
+.accueil-container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+}
+
+.accueil-container>h1, .accueil-container>h2{
+    text-align: center;
+}
+
+.presentation-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.img-chien, .img-chat {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.img-chien {
+    background-image: url(/assets/img/chien.jpg);
+}
+
+.img-chat {
+    background-image: url(/assets/img/chat.jpg);
+}
+
+.presentation-text {
+    width: 60vw;
+    height: 30vh;
+    background-color: #FFBA08;
+    padding: 50px;
+    border-radius: 50px;
+}
+
+.presentation-text>h3 {
+    text-align: center;
+}
+
+.livre-dor {
+    width: 70vw;
+    height: 20vh;
+    background-color: #FFBA08;
+    padding: 50px;
+    border-radius: 50px;
+}
+
+/* NOS FORMULES */
+.formules-container {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10vh;
+}
+
+.formule-box {
+    width: 80vw;
+}
+
+.formule-box>h2 {
+    text-align: center;
+    margin: 5vh 0;
+}
+
+.formule-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.formule-text {
+    width: 40%;
+    height: 40vh;
+    background-color: #FFBA08;
+    padding: 50px;
+    border-radius: 50px;
+}
+
+.conditions {
+    width: 80vw;
+    height: 40vh;
+    background-color: #FFBA08;
+    padding: 50px;
+    border-radius: 50px;
+    margin-top: 5vh;
+    margin-bottom: 15vh;
+}
+
+/* RESERVATION */
+.reservation-container{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10vh;
+}
+
+.reservation-container>h1{
+    font-size: 45px;
+    margin: 40px 0;
+}
+
+.reservation-form-container{
+    width: 1200px;
+    height: 1600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    margin-bottom: 15vh;
+    background-color: #FFBA08;
+}
+
+.reservation-form-content{
+    width: 1150px;
+    height: 1550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.user-part>h2, .animal-part>h2, .end-part>h2{
+    font-size: 30px;
+}
+
+/* Partie User */
+.user-part{
+    width: 710px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.row{
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-group{
+    width: 270px;
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.long-input-group{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.form-input, #reservation_dateDebut, #reservation_dateFin{
+    width: 270px;
+    height: 35px;
+    font-size: 15px;
+    border-radius: 10px;
+    padding: 0 7px;
+    margin-top: 5px;
+}
+
+.long-form-input{
+    width: 100%;
+    height: 35px;
+    font-size: 15px;
+    border-radius: 10px;
+    padding: 0 7px;
+    margin-top: 5px;
+}
+
+/* Partie Animal */
+.animal-part{
+    width: 100%;
+    height: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#reservation_animal_type, #reservation_animal_sexe, #reservation_animal_sterilisation, #reservation_animal_dateChaleurs, #reservation_animal_medical, #animal_profil_type, #animal_profil_sexe, #animal_profil_sterilisation{
+    height: 35px;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+#reservation_animal_type>input, #reservation_animal_sexe>input, #reservation_animal_sterilisation>input, #reservation_animal_medical>input, #animal_profil_type>input, #animal_profil_sexe>input, #animal_profil_sterilisation>input{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+#reservation_animal_type_1, #animal_profil_type_1{
+    margin-left: 34px;
+
+}
+#reservation_animal_sexe_1, #animal_profil_sexe_1{
+    margin-left: 42px;
+}
+
+#reservation_animal_sterilisation_1, #reservation_animal_medical_1, #animal_profil_sterilisation_1{
+    margin-left: 50px;
+}
+
+#reservation_animal_ordonnanceFile{
+    margin: 5px 0;
+}
+
+.sterilisation-row{
+    display: flex;
+    align-items: flex-end;
+}
+
+.sterilisation-input-group{
+    width: 270px;
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 169px 0 171px;
+}
+
+.medical-row{
+    width: 711px;
+    height: 68px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.chaleurs-group, .file-group{
+    visibility: hidden;
+    width: 270px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chaleurs-group>label, .file-group>label{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.traitement-group{
+    visibility: hidden;
+}
+
+.textarea-group{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.form-textarea-input{
+    width: 50%;
+    height: 200px;
+    font-size: 15px;
+    padding: 7px;
+    margin-top: 5px;
+    border-radius: 10px;
+}
+
+.terms{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.checkbox-group, .traitement-group{
+    font-size: 18px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.checkbox-group>input, .traitement-group>input{
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+/* Partie Dates et prix */
+.end-part{
+    width: 710px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.price-container{
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.price-content{
+    width: 150px;
+    height: 35px;
+    background-color: #FBFEF9;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+}
+
+#reservation_submit{
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #3F88C5;
+    cursor: pointer;
+}
+
+/* CONTACT */
+.contact-container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.maps{
+    width: 35vw;
+    height: 450px;
+}
+
+.contact-form-container{
+    width: 450px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 40px;
+    background-color: #FFBA08;
+    border-radius: 50px;
+}
+
+.contact-input{
+    width: 250px;
+    height: 35px;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.contact-textarea{
+    width: 370px;
+    height: 200px;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.contact-btn{
+    width: 150px;
+    height: 35px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 40px;
+    background-color: #3F88C5;
+    cursor: pointer;
+}
+
+.horaires{
+    width: 350px;
+    height: 450px;
+    background-color: #FFBA08;
+    padding: 50px;
+    border-radius: 50px;
+}
+
+iframe{
+    border-radius: 50px;
+}
+
+.contact-form>h2, .horaires>h2{
+    text-align: center;
+}
+
+/* CONNEXION / CREER UN COMPTE */
+.user-container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-content{
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #3F88C5;
+    box-shadow: 0 3px 5px black;
+    border-radius: 50px;
+}
+
+.user-content>h1{
+    font-size: 45px;
+}
+
+.register-form{
+    width: 300px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.login-form{
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.group-input{
+    width: 100%;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.form-control{
+    width: 100%;
+    height: 45px;
+    font-size: 20px;
+    padding: 0 15px;
+    margin-top: 5px;
+    border-radius: 40px;
+}
+
+.submit-btn{
+    width: 100%;
+    height: 45px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 40px;
+    background-color: #FFBA08;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* MON PROFIL */
+.profil-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.profil-link {
+    text-decoration: none;
+}
+
+.profil-card {
+    width: 350px;
+    height: 250px;
+    color: black;
+    background-color: #FFBA08;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* MON PROFIL : MES INFORMATIONS PERSONELLES */
+.user-info-container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-form-container{
+    width: 760px;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background-color: #FFBA08;
+}
+
+.user-form-content{
+    width: 710px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.user-form-content>h2{
+    font-size: 30px;
+}
+
+.user-form-content>.btn{
+    width: 270px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #3F88C5;
+    cursor: pointer;
+}
+
+/* MON PROFIL : FICHES ANIMAUX */
+.animal-info-container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.animal-form-container{
+    width: 1000px;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background-color: #FFBA08;
+}
+
+.animal-form-content{
+    width: 950px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.row-3{
+    width: 611px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.profil-textarea-input{
+    width: 100%;
+    height: 100px;
+    font-size: 15px;
+    padding: 7px;
+    margin-top: 5px;
+    border-radius: 10px;
+}
+
+.animal-form-content>.btn{
+    width: 270px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #3F88C5;
+    cursor: pointer;
+}
+
+/* MON PROFIL : MES RESERVATIONS */
+.reservation-list-container {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10vh;
+    margin-bottom: 15vh;
+}
+
+.reservation-list-container>h1 {
+    font-size: 45px;
+    margin: 20px 0;
+}
+
+.reservation-list-content {
+    width: 1250px;
+    min-height: 350px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: #FFBA08;
+}
+
+.header-list {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px 10px 0 0;
+}
+
+.nbrReservation-container {
+    width: 100%;
+    height: 50%;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nbrReservation {
+    width: 60px;
+    height: 35px;
+    background-color: #FBFEF9;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.box-list {
+    width: 90%;
+    height: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.box {
+    width: 200px;
+    height: 30px;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: rgb(203, 203, 203);
+}
+
+.reservation-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.reservation-row {
+    width: 90%;
+    height: 70px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #FBFEF9;
+    border-radius: 5px;
+    margin-bottom: 40px;
+}
+
+#en-cours {
+    background-color: rgb(40, 90, 255);
+}
+
+#valide {
+    background-color: rgb(40, 255, 112);
+}
+
+#refus {
+    background-color: rgb(234, 40, 255);
+}
+
+#annule {
+    background-color: rgb(255, 40, 40);
+}
+

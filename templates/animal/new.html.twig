@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Profil{% endblock %}
+
+{% block body %}
+	<div class="animal-info-container">
+		<h1>Fiches Animaux</h1>
+		
+		{{ include('animal/_form.html.twig') }}
+		<a href="{{ path('app_animal_index') }}">Revenir en arrière</a>
+	</div>
+{% endblock %}

@@ -1,0 +1,74 @@
+{# FORMULAIRE RESERVATION #}
+{{ form_start(form, { 'attr' : { 'class': 'reservation-form-container' } }) }}
+<div class="reservation-form-content">
+    {# PARTIE CLIENT #}
+    <div class="user-part">
+        <h2>Informations personnelles</h2>
+        <div class="row">
+            {{ form_row(form.user.nom) }}
+            {{ form_row(form.user.prenom) }}
+        </div>
+        {{ form_row(form.user.adresse) }}
+        <div class="row">
+            {{ form_row(form.user.codePostal) }}
+            {{ form_row(form.user.ville) }}
+        </div>
+        <div class="row">
+            {{ form_row(form.user.email) }}
+            {{ form_row(form.user.telephone) }}
+        </div>
+    </div>
+    {# PARTIE ANIMAL #}
+    <div class="animal-part">
+        <h2>Mon animal</h2>
+        <div class="row">
+            {{ form_row(form.animal.nom) }}
+            {{ form_row(form.animal.type) }}
+            {{ form_row(form.animal.sexe) }}
+        </div>
+        <div class="row">
+            {{ form_row(form.animal.race) }}
+            {{ form_row(form.animal.age) }}
+            {{ form_row(form.animal.poids) }}
+        </div>
+        <div class="sterilisation-row">
+            {{ form_row(form.animal.numPuce) }}
+            {{ form_row(form.animal.sterilisation)}}
+            <div class="chaleurs-group">
+                {{ form_label(form.animal.dateChaleurs) }}
+                {{ form_widget(form.animal.dateChaleurs) }}
+            </div>
+        </div>
+        <div class="medical-row">
+            {{ form_row(form.animal.medical) }}
+            <div class="file-group">
+                {{ form_label(form.animal.ordonnanceFile) }}
+                {{ form_widget(form.animal.ordonnanceFile) }}
+                <small>{{ form_help(form.animal.ordonnanceFile) }}</small>
+            </div>
+        </div>
+        {{ form_row(form.animal.infoSup) }}
+        <p class="terms">Je m'engage :</p>
+        {{ form_row(form.animal.vaccins) }}
+        {{ form_row(form.animal.vermifuge) }}
+        {{ form_row(form.animal.alimentation) }}
+        <div class="traitement-group">
+            {{ form_label(form.animal.traitement) }}
+            {{ form_widget(form.animal.traitement) }}
+        </div>
+    </div>
+    {# PARTIE DATES ET PRIX #}
+    <div class="end-part">
+        <h2>Dates du séjour</h2>
+        <div class="row">
+            {{ form_row(form.dateDebut) }}
+            {{ form_row(form.dateFin) }}
+        </div>
+        <div class="price-container">
+            <p>Prix :</p>
+            <div class="price-content"><p>€</p></div>
+        </div>
+        {{ form_row(form.submit) }}
+    </div>
+</div>
+{{ form_end(form) }}
