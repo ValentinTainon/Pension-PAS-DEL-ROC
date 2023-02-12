@@ -30,7 +30,7 @@ class ReservationRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Reservation $entity, bool $flush = false): void
+    public function remove(Reservation $entity, bool $flush = true): void
     {
         $this->getEntityManager()->remove($entity);
 

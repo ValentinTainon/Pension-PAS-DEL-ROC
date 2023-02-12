@@ -9,12 +9,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Length;
 
@@ -83,7 +80,7 @@ class AnimalType extends AbstractType
                 'choices' => ['Oui' => true, 'Non' => false],
                 'expanded' => true
             ])
-            ->add('ordonnanceFile', FileType::class, [
+            ->add('ordonnance', FileType::class, [
                 'label' => 'Je transmet l\'ordonnance*',
                 'help' => 'Formats de fichier supportés : jpg, jpeg, pdf',
                 'mapped' => false,
@@ -112,11 +109,11 @@ class AnimalType extends AbstractType
                 'label' => 'À ce que le traitement vermifuge ait moins de 3 mois durant la période de pension*'])
             ->add('alimentation', CheckboxType::class, [
                 'row_attr' => ['class' => 'checkbox-group'],
+                'required' => false,
                 'label' => 'À fournir l’alimentation de mon animal lors de son arrivée (en quantité suffisante pour la durée du séjour)*'])
             ->add('traitement', CheckboxType::class, [
-                'required' => true,
                 'label' => 'À fournir le traitement adapté de mon animal lors de son arrivée
-                (un supplément tarifaire de 1€ par prise sera appliqué)*']);
+                (un supplément tarifaire de 1€ par prise sera appliqué sur place)*']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

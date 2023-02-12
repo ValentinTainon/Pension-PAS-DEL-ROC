@@ -13,7 +13,7 @@
             </tr>
             <tr>
                 <th>DateCreation</th>
-                <td>{{ reservation.dateCreation ? reservation.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ reservation.dateCreation }}</td>
             </tr>
             <tr>
                 <th>DateDebut</th>
@@ -30,10 +30,6 @@
             <tr>
                 <th>Status</th>
                 <td>{{ reservation.status }}</td>
-            </tr>
-            <tr>
-                <th>AvisClient</th>
-                <td>{{ reservation.avisClient }}</td>
             </tr>
         </tbody>
     </table>

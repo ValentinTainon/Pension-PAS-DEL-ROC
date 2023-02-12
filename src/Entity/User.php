@@ -52,10 +52,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 16)]
     private ?string $telephone = null;
 
-    #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: Animal::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Animal::class)]
     private Collection $animals;
 
-    #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: Reservation::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Reservation::class)]
     private Collection $reservations;
 
     public function __construct()
@@ -230,7 +230,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->animals->contains($animal)) {
             $this->animals->add($animal);
-            $animal->setIdUser($this);
+            $animal->setUser($this);
         }
 
         return $this;
@@ -240,8 +240,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->animals->removeElement($animal)) {
             // set the owning side to null (unless already changed)
-            if ($animal->getIdUser() === $this) {
-                $animal->setIdUser(null);
+            if ($animal->getUser() === $this) {
+                $animal->setUser(null);
             }
         }
 
@@ -260,7 +260,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->reservations->contains($reservation)) {
             $this->reservations->add($reservation);
-            $reservation->setIdUser($this);
+            $reservation->setUser($this);
         }
 
         return $this;
@@ -270,8 +270,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->reservations->removeElement($reservation)) {
             // set the owning side to null (unless already changed)
-            if ($reservation->getIdUser() === $this) {
-                $reservation->setIdUser(null);
+            if ($reservation->getUser() === $this) {
+                $reservation->setUser(null);
             }
         }
 

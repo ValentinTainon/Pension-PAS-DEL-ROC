@@ -9,7 +9,7 @@
 				<a href="https://www.maps.ie/distance-area-calculator.html">measure area map</a>
 			</iframe>
 		</div>
-		{{ form_start(form, { 'attr' : { 'class': 'contact-form-container' } }) }}
+		{{ form_start(form, { 'attr' : { 'id': 'contact-form', 'class': 'contact-form-container' } }) }}
 			<h2>Ecrivez-nous !</h2>
 			{{ form_row(form.name) }}
 			{{ form_row(form.email) }}
@@ -18,6 +18,14 @@
 		{{ form_end(form) }}
 		<div class="horaires">
 			<h2>Horaires</h2>
+			<ul>
+				<li>Lundi: 9h-12h 14h-17h</li>
+				<li>Mardi: 9h-12h 14h-17h</li>
+				<li>Mercredi: 9h-12H</li>
+				<li>Jeudi: 9h-12h 14h-17h</li>
+				<li>Vendredi: 9h-12h 14h-17h</li>
+				<li>Samedi: 9h-12h</li>
+			</ul>
 		</div>
 	</div>
 {% endblock %}

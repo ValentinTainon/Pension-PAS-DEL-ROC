@@ -14,8 +14,8 @@ class Reservation
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $dateCreation = null;
+    #[ORM\Column(length: 20)]
+    private ?string $dateCreation = null;
 
     #[ORM\Column(length: 50)]
     private ?string $dateDebut = null;
@@ -29,28 +29,25 @@ class Reservation
     #[ORM\Column(length: 50)]
     private ?string $status = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $avisClient = null;
+    #[ORM\ManyToOne(inversedBy: 'reservations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $idUser = null;
-
-    #[ORM\ManyToOne(inversedBy: 'reservations')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Animal $idAnimal = null;
+    private ?Animal $animal = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDateCreation(): ?\DateTimeInterface
+    public function getDateCreation(): ?string
     {
         return $this->dateCreation;
     }
 
-    public function setDateCreation(\DateTimeInterface $dateCreation): self
+    public function setDateCreation(string $dateCreation): self
     {
         $this->dateCreation = $dateCreation;
 
@@ -105,38 +102,26 @@ class Reservation
         return $this;
     }
 
-    public function getAvisClient(): ?string
+    public function getUser(): ?User
     {
-        return $this->avisClient;
+        return $this->user;
     }
 
-    public function setAvisClient(?string $avisClient): self
+    public function setUser(?User $user): self
     {
-        $this->avisClient = $avisClient;
+        $this->user = $user;
 
         return $this;
     }
 
-    public function getIdUser(): ?User
+    public function getAnimal(): ?Animal
     {
-        return $this->idUser;
+        return $this->animal;
     }
 
-    public function setIdUser(?User $idUser): self
+    public function setAnimal(?Animal $animal): self
     {
-        $this->idUser = $idUser;
-
-        return $this;
-    }
-
-    public function getIdAnimal(): ?Animal
-    {
-        return $this->idAnimal;
-    }
-
-    public function setIdAnimal(?Animal $idAnimal): self
-    {
-        $this->idAnimal = $idAnimal;
+        $this->animal = $animal;
 
         return $this;
     }

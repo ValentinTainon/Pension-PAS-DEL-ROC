@@ -18,8 +18,6 @@ class AnimalProfilType extends AbstractType
     const CHAT = 'chat';
     const MALE = 'mâle';
     const FEMELLE = 'femelle';
-    const OUI = 'oui';
-    const NON = 'non';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -65,7 +63,7 @@ class AnimalProfilType extends AbstractType
             ->add('sterilisation', ChoiceType::class, [
                 'row_attr' => ['class' => 'input-group'],
                 'label' => 'Stérilisé / Castré ?',
-                'choices' => ['Oui' => self::OUI, 'Non' => self::NON], 
+                'choices' => ['Oui' => true, 'Non' => false], 
                 'expanded' => true])
             ->add('infoSup', TextareaType::class, [
                 'row_attr' => ['class' => 'textarea-group'],

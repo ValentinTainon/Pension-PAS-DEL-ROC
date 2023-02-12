@@ -5,9 +5,6 @@
 {% block body %}
     <div class="reservation-container">
         <h1>Réservation Séjour</h1>
-        <div class="reservation-form">
-            {{ include('reservation/_form.html.twig') }}
-            {# <a href="{{ path('app_reservation_index') }}">Revenir en arrière</a> #}
-        </div>
+        {{ include('reservation/_form.html.twig', {'submit_label': 'Réserver'}) }}
     </div>
 {% endblock %}

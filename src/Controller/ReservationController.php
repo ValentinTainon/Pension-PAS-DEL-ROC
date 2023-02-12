@@ -2,79 +2,80 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Entity\Animal;
 use App\Entity\Reservation;
 use App\Form\ReservationType;
+use App\Repository\UserRepository;
 use App\Repository\AnimalRepository;
 use App\Repository\ReservationRepository;
-use App\Repository\UserRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\String\Slugger\SluggerInterface;
+use App\Services\FileUploader;
 
 #[Route('/reservation')]
 class ReservationController extends AbstractController
 {
     #[Route('/', name: 'app_reservation_index', methods: ['GET'])]
+    #[IsGranted('ROLE_USER')]
     public function index(ReservationRepository $reservationRepository): Response
     {
         return $this->render('reservation/index.html.twig', [
             'reservations' => $reservationRepository->findAll(),
         ]);
     }
-    
+
     #[Route('/new', name: 'app_reservation_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, UserRepository $userRepository, AnimalRepository $animalRepository, ReservationRepository $reservationRepository, SluggerInterface $slugger): Response
+    #[IsGranted('ROLE_USER')]
+    public function new(Request $request, UserRepository $userRepository, AnimalRepository $animalRepository, ReservationRepository $reservationRepository, FileUploader $fileUploader): Response
     {
-        $author = $this->getUser(); // Récupère et stocke l'utilisateur connecté.
-
-        if (!$author) {
-            return $this->redirectToRoute('app_main');
+        $user = $this->getUser(); // Récupère et stocke l'utilisateur connecté.
+        if (!$user) {
             $this->addFlash('Erreur', 'Vous devez avoir un compte et vous connecter pour réserver !');
-        } 
+            return $this->redirectToRoute('app_main');
+        }
 
-        $user = new User();
         $animal = new Animal();
         $reservation = new Reservation();
 
         $form = $this->createForm(ReservationType::class, ['user' => $user, 'animal' => $animal, 'reservation' => $reservation]);
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $ordonnanceFile = $form['animal']->get('ordonnanceFile')->getData();      
-            
+            $ordonnanceFile = $form['animal']->get('ordonnance')->getData();
+            $traitement = $form['animal']->get('traitement')->getData();
+            $dateCreation = (new \DateTime('now'))->format('d-m-Y H:i:s');
+            $datedebut = $form->get('dateDebut')->getData();
+            $dateFin = $form->get('dateFin')->getData();
+            $prix = $form->get('prix')->getData();
+            $status = "Demande en cours de traitement";
+
             if ($ordonnanceFile) {
-                $originalFilename = pathinfo($ordonnanceFile->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $ordonnanceFile->guessExtension();
-                try {
-                    $ordonnanceFile->move(
-                        $this->getParameter('documents_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                }
-                $animal->setOrdonnanceFile($newFilename);
+                $ordonnanceFilename = $fileUploader->upload($ordonnanceFile);
+                $animal->setOrdonnanceFile($ordonnanceFilename);
             }
 
             $userRepository->save($user, true);
-            $animal->setIdUser($author);
+            $animal->setUser($user)
+                ->setTraitement($traitement);
             $animalRepository->save($animal, true);
-            $reservation->setIdUser($author);
-            $reservation->setIdAnimal($animal);
+            $reservation->setUser($user)
+                ->setAnimal($animal)
+                ->setDateCreation($dateCreation)
+                ->setDateDebut($datedebut)
+                ->setDateFin($dateFin)
+                ->setPrix($prix)
+                ->setStatus($status);
             $reservationRepository->save($reservation, true);
 
-            $this->addFlash('Succès', 'Votre réservation à bien été envoyé !');
+            $this->addFlash('Succès', 'Votre demande de réservation à bien été envoyé !');
 
             return $this->redirectToRoute('app_main', [], Response::HTTP_SEE_OTHER);
         }
-     
+
         return $this->renderForm('reservation/new.html.twig', [
             'reservation' => $reservation,
             'form' => $form,
@@ -82,6 +83,7 @@ class ReservationController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_reservation_show', methods: ['GET'])]
+    #[IsGranted('ROLE_USER')]
     public function show(Reservation $reservation): Response
     {
         return $this->render('reservation/show.html.twig', [
@@ -90,27 +92,56 @@ class ReservationController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_reservation_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Reservation $reservation, ReservationRepository $reservationRepository): Response
+    #[IsGranted('ROLE_USER')]
+    public function edit(AnimalRepository $animalRepository, Request $request, Reservation $reservation, ReservationRepository $reservationRepository): Response
     {
+        $user = $this->getUser();
+
         $form = $this->createForm(ReservationType::class, $reservation);
+        if (!$this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            $form->remove('valider')->remove('refuser');
+        }
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $reservationRepository->save($reservation, true);
+        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN') or $reservation->getUser() == $user) {
+            if ($form->isSubmitted() && $form->isValid()) {
+                // $animal->setOrdonnanceFile(new File($this->getParameter('ordonnances_directory').'/'.$animal->setOrdonnanceFile()));
 
-            return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
+                if ($form->get('submit')->isClicked()) {
+                    $status = "Demande en cours de traitement";
+                    $this->addFlash('Succès', 'Réservation modifiée !');
+                } elseif ($form->get('annuler')->isClicked()) {
+                    $status = "Réservation annulée";
+                    $this->addFlash('Succès', 'Réservation Annulée !');
+                } elseif ($form->get('valider')->isClicked()) {
+                    $status = "Réservation validée";
+                    $this->addFlash('Succès', 'Réservation Validée !');
+                } elseif ($form->get('refuser')->isClicked()) {
+                    $status = "Réservation refusée";
+                    $this->addFlash('Succès', 'Réservation Refusée !');
+                }
+
+                $reservation->setStatus($status);
+                $reservationRepository->save($reservation, true);
+
+                return $this->redirectToRoute('app_mesReservations', [], Response::HTTP_SEE_OTHER);
+            }
         }
 
         return $this->renderForm('reservation/edit.html.twig', [
+            'animals' => $animalRepository->findBy([
+                'user' => $user,
+            ]),
             'reservation' => $reservation,
             'form' => $form,
         ]);
     }
 
     #[Route('/{id}', name: 'app_reservation_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
     public function delete(Request $request, Reservation $reservation, ReservationRepository $reservationRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$reservation->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $reservation->getId(), $request->request->get('_token'))) {
             $reservationRepository->remove($reservation, true);
         }
 

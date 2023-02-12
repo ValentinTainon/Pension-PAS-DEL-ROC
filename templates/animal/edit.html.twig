@@ -3,13 +3,10 @@
 {% block title %}Fiches Animaux{% endblock %}
 
 {% block body %}
-    <h1>Fiches Animaux</h1>
-
-    <a href="{{ path('app_animal_new') }}">Ajouter un animal</a>
-
-    {{ include('animal/_form.html.twig') }}
-
-    <a href="{{ path('app_animal_index') }}">back to list</a>
-
-    {{ include('animal/_delete_form.html.twig') }}
+	<div class="animal-container">
+		<h1>Fiches Animaux</h1>
+		{{ include('animal/_form.html.twig', {'button_label': 'Enregistrer les modifications'}) }}
+		<a href="{{ path('app_animal_index') }}">Retour en arrière</a>
+		{{ include('animal/_delete_form.html.twig') }}
+	</div>
 {% endblock %}

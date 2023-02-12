@@ -66,9 +66,9 @@ class Animal
 
     #[ORM\ManyToOne(inversedBy: 'animals')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $idUser = null;
+    private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'idAnimal', targetEntity: Reservation::class)]
+    #[ORM\OneToMany(mappedBy: 'animal', targetEntity: Reservation::class)]
     private Collection $reservations;
 
     public function __construct()
@@ -273,14 +273,14 @@ class Animal
         return $this;
     }
 
-    public function getIdUser(): ?User
+    public function getUser(): ?User
     {
-        return $this->idUser;
+        return $this->user;
     }
 
-    public function setIdUser(?User $idUser): self
+    public function setUser(?User $user): self
     {
-        $this->idUser = $idUser;
+        $this->user = $user;
 
         return $this;
     }
@@ -297,7 +297,7 @@ class Animal
     {
         if (!$this->reservations->contains($reservation)) {
             $this->reservations->add($reservation);
-            $reservation->setIdAnimal($this);
+            $reservation->setAnimal($this);
         }
 
         return $this;
@@ -307,8 +307,8 @@ class Animal
     {
         if ($this->reservations->removeElement($reservation)) {
             // set the owning side to null (unless already changed)
-            if ($reservation->getIdAnimal() === $this) {
-                $reservation->setIdAnimal(null);
+            if ($reservation->getAnimal() === $this) {
+                $reservation->setAnimal(null);
             }
         }
 

@@ -6,14 +6,15 @@
 
 body {
     background-color: #FBFEF9;
+    scroll-behavior: smooth;
 }
 
 nav,
 footer {
     width: 100vw;
-    height: 10vh;
+    height: 8vh;
     position: fixed;
-    background-color: #1C3144;
+    background-color: #137edb;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -32,11 +33,13 @@ nav>a, footer>a, footer>p{
     color: #FBFEF9;
     text-decoration: none;
 }
+
 /* ALERTES */
 .alert{
     width: 100%;
     position: fixed;
     text-align: center;
+    top: 0;
 }
 
 .alert-success{
@@ -55,8 +58,7 @@ nav>a, footer>a, footer>p{
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    padding-top: 10vh;
-    padding-bottom: 10vh;
+    padding: 8vh 0;
 }
 
 .accueil-container>h1, .accueil-container>h2{
@@ -113,41 +115,38 @@ nav>a, footer>a, footer>p{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10vh;
+    margin: 10vh 0;
 }
 
-.formule-box {
-    width: 80vw;
-}
-
-.formule-box>h2 {
-    text-align: center;
-    margin: 5vh 0;
-}
-
-.formule-content {
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.formule-text {
-    width: 40%;
-    height: 40vh;
-    background-color: #FFBA08;
-    padding: 50px;
-    border-radius: 50px;
-}
-
-.conditions {
+.infos {
     width: 80vw;
     height: 40vh;
     background-color: #FFBA08;
     padding: 50px;
     border-radius: 50px;
     margin-top: 5vh;
-    margin-bottom: 15vh;
+}
+
+.infos>h2{
+    text-align: center;
+}
+
+.formules {
+    width: 80vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card {
+    width: 45%;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFBA08;
+    padding: 50px;
+    border-radius: 50px;
 }
 
 /* RESERVATION */
@@ -156,7 +155,7 @@ nav>a, footer>a, footer>p{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10vh;
+    margin-top: 8vh;
 }
 
 .reservation-container>h1{
@@ -355,32 +354,48 @@ nav>a, footer>a, footer>p{
     justify-content: space-between;
 }
 
-.price-container{
+.price-group{
     display: flex;
     align-items: center;
     font-size: 18px;
     font-weight: bold;
 }
 
-.price-content{
-    width: 150px;
+.price-input{
+    width: 100px;
     height: 35px;
-    background-color: #FBFEF9;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0 7px;
+    text-align: center;
     border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin-left: 10px;
 }
 
-#reservation_submit{
-    width: 150px;
+#reservation_submit, #reservation_annuler, #reservation_valider, #reservation_refuser{
+    width: fit-content;
     height: 35px;
     border-radius: 10px;
     font-size: 16px;
+    padding: 0 10px;
     font-weight: bold;
-    background-color: #3F88C5;
     cursor: pointer;
+}
+
+#reservation_submit{
+    background-color: #3F88C5;
+}
+
+#reservation_annuler{
+    background-color: red;
+}
+
+#reservation_valider{
+    background-color: green;
+}
+
+#reservation_refuser{
+    background-color: purple;
 }
 
 /* CONTACT */
@@ -439,16 +454,24 @@ nav>a, footer>a, footer>p{
     width: 350px;
     height: 450px;
     background-color: #FFBA08;
-    padding: 50px;
+    padding: 30px 0;
     border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.horaires>h2{
+    margin-bottom: 30px;
+}
+
+.horaires>ul>li{
+    line-height: 50px;
+    list-style-type: none; 
 }
 
 iframe{
     border-radius: 50px;
-}
-
-.contact-form>h2, .horaires>h2{
-    text-align: center;
 }
 
 /* CONNEXION / CREER UN COMPTE */
@@ -523,14 +546,23 @@ iframe{
     margin-top: 10px;
 }
 
-/* MON PROFIL */
+/* MON PROFIL : ACCUEIL */
 .profil-container {
     width: 100vw;
     height: 100vh;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cards-container{
+    width: 100%;
+    height: 60%;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    flex-wrap: wrap;
 }
 
 .profil-link {
@@ -592,7 +624,7 @@ iframe{
 }
 
 /* MON PROFIL : FICHES ANIMAUX */
-.animal-info-container{
+.animal-container{
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -650,8 +682,8 @@ iframe{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10vh;
-    margin-bottom: 15vh;
+    margin-top: 8vh;
+    margin-bottom: 13vh;
 }
 
 .reservation-list-container>h1 {
@@ -661,7 +693,6 @@ iframe{
 
 .reservation-list-content {
     width: 1250px;
-    min-height: 350px;
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -708,10 +739,22 @@ iframe{
     align-items: center;
 }
 
+.status {
+    width: 250px;
+    height: 30px;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 .box {
-    width: 200px;
+    width: fit-content;
     height: 30px;
     font-size: 18px;
+    padding: 0 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -722,7 +765,7 @@ iframe{
 .reservation-list {
     width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
     padding-top: 20px;
 }
@@ -735,22 +778,25 @@ iframe{
     align-items: center;
     background-color: #FBFEF9;
     border-radius: 5px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
-#en-cours {
+.dateFin{
+    display: none;
+}
+
+.en-cours {
     background-color: rgb(40, 90, 255);
 }
 
-#valide {
+.valider {
     background-color: rgb(40, 255, 112);
 }
 
-#refus {
+.refuser {
     background-color: rgb(234, 40, 255);
 }
 
-#annule {
+.annuler {
     background-color: rgb(255, 40, 40);
 }
-

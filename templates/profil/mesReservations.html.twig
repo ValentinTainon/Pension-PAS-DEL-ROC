@@ -6,44 +6,37 @@
 {% block body %}
 	<div class="reservation-list-container">
 		<h1>Mes Réservations</h1>
-		<a href="{{ path('app_profil') }}">Retour</a>
 		<div class="reservation-list-content">
-			<div class="header-list">
-				<div class="nbrReservation-container">
-					<p>Nombre de réservation</p>
-					<div class="nbrReservation"><p></p></div>
+			{% if is_granted('ROLE_ADMIN') %}
+				<div class="header-list">
+					<div class="nbrReservation-container">Nombre de réservations
+						<div class="nbrReservation"></div>
+					</div>
+					<div class="box-list">
+						<button class="status en-cours">Demande en cours de traitement</button>
+						<button class="status valider">Validée</button>
+						<button class="status refuser">Refusée</button>
+						<button class="status annuler">Annulée</button>
+					</div>
 				</div>
-				<div class="box-list">
-					<div class="box" id="en-cours"><p>En cours de validation</p></div>
-					<div class="box" id="valide"><p>Validée</p></div>
-					<div class="box" id="refus"><p>Refusée</p></div>
-					<div class="box" id="annule"><p>Annulée</p></div>
-				</div>
-			</div>
+			{% endif %}
 			<div class="reservation-list">
-				<div class="reservation-row">
-					<div class="box" id="nom"></div>
-					<div class="box" id="date"><p>Réservation du</p></div>
-					<div class="box" id="statut"></div>
-					<a href="#">
-						<i class="fa-solid fa-pen"></i>
-					</a>
-					<a href="#">
-						<i class="fa-solid fa-star"></i>
-					</a>
-				</div>
-				<div class="reservation-row">
-					<div class="box" id="nom"></div>
-					<div class="box" id="date"><p>Réservation du</p></div>
-					<div class="box" id="statut"></div>
-					<a href="#">
-						<i class="fa-solid fa-pen"></i>
-					</a>
-					<a href="#">
-						<i class="fa-solid fa-star"></i>
-					</a>
-				</div>
+				{% for reservation in reservations %}
+					<div class="reservation-row">
+						<div class="box">{{ reservation.user.prenom }} {{ reservation.user.nom }}</div>
+						<div class="box">{{ reservation.dateCreation }}</div>
+						<div class="box dateFin">{{ reservation.dateFin }}</div>
+						<div class="box">{{ reservation.status }}</div>
+						<a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">
+							<i class="fa-solid fa-pen"></i>
+						</a>
+						<a class="avis-icon" href="{{path('app_avisClient', {'id' : app.user.id})}}">
+							<i class="fa-solid fa-star"></i>
+						</a>
+					</div>
+				{% endfor %}
 			</div>
 		</div>
+		<a href="{{ path('app_profil') }}">Retour</a>
 	</div>
 {% endblock %}

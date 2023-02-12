@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\ContactType;
 use App\Services\MailerService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,9 +27,9 @@ class ContactController extends AbstractController
             $from = $contactFormData['email'];
             $subject = 'Demande de contact sur votre site de ' . $contactFormData['email'];
             $content = $contactFormData['name'] . ' vous a envoyé le message suivant: ' . $contactFormData['message'];
-            $this->addFlash('Succès', 'Votre message a été envoyé');
             // dd($contactFormData);
             $mailer->sendEmail(from: $from, subject: $subject, content: $content);
+            $this->addFlash('Succès', 'Votre message à été envoyé !');
             return $this->redirectToRoute('app_contact');
         }
         return $this->render('contact/contact.html.twig', [
