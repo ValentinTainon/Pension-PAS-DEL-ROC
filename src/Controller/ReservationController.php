@@ -4,13 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Animal;
 use App\Entity\Reservation;
+use App\Entity\User;
 use App\Form\ReservationType;
 use App\Repository\UserRepository;
 use App\Repository\AnimalRepository;
 use App\Repository\ReservationRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -52,6 +52,7 @@ class ReservationController extends AbstractController
             $dateFin = $form->get('dateFin')->getData();
             $prix = $form->get('prix')->getData();
             $status = "Demande en cours de traitement";
+            $selectAnimal = $form['animal']->get('selectAnimal')->getData();
 
             if ($ordonnanceFile) {
                 $ordonnanceFilename = $fileUploader->upload($ordonnanceFile);
@@ -60,6 +61,7 @@ class ReservationController extends AbstractController
 
             $userRepository->save($user, true);
             $animal->setUser($user)
+                ->setSelectAnimal($selectAnimal)
                 ->setTraitement($traitement);
             $animalRepository->save($animal, true);
             $reservation->setUser($user)

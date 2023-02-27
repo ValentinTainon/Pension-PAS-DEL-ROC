@@ -20,19 +20,20 @@ class ReservationType extends AbstractType
             ->add('animal', AnimalType::class, ['label' => false])
             ->add('dateDebut', TextType::class, [
                 'row_attr' => ['class' => 'input-group'],
-                'label' => 'Date et heure d\'arrivée*',
+                'label' => 'Date et heure d\'arrivée',
                 'attr' => ['class' => 'form-input datepicker']])
             ->add('dateFin', TextType::class, [
                 'row_attr' => ['class' => 'input-group'],
-                'label' => 'Date et heure de départ*',
+                'label' => 'Date et heure de départ',
                 'attr' => ['class' => 'datepicker']])
             ->add('prix', NumberType::class, [
                 'row_attr' => ['class' => 'price-group'],
-                'label' => 'Prix €',
+                'label' => 'Prix',
                 'empty_data' => 0.00,
                 'attr' => [
                     'class' => 'price-input',
-                    'readonly' => true]])
+                    'readonly' => true],
+                'required' => false])
             ->add('submit', SubmitType::class)
             ->add('annuler', SubmitType::class,[
                 'label' => 'Annuler la réservation'])

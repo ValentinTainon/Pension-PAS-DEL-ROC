@@ -1,11 +1,14 @@
+/* REGLES GENERALES */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 1px;
 }
 
 body {
-    background-color: #FBFEF9;
+    background-color: rgb(245, 245, 245);
     scroll-behavior: smooth;
 }
 
@@ -14,7 +17,7 @@ footer {
     width: 100vw;
     height: 8vh;
     position: fixed;
-    background-color: #137edb;
+    background-color: #dd8452;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -24,14 +27,97 @@ nav {
     top: 0;
 }
 
+nav a{
+    padding: 5px 10px;
+    border-radius: 30px;
+    color: #ffffff;
+}
+
+.fa-house{
+    padding: 10px 5px;
+}
+
+nav a:hover{
+    transition: 0.5s;
+    color: #1b1f28;
+    background-color: white;
+}
+
 footer {
     bottom: 0;
 }
 
-nav>a, footer>a, footer>p{
-    font-size: 20px;
-    color: #FBFEF9;
+nav a, footer a, footer p{
+    font-size: 16px;
+    color: #ffffff;
     text-decoration: none;
+}
+
+.fa-facebook{
+    font-size: 20px;
+}
+
+h1{
+    font-size: 35px;
+}
+
+h2{
+    font-size: 20px;
+}
+
+h3{
+    font-size: 18px;
+}
+
+p, li{
+    font-size: 14px;
+}
+
+/* Custom Form */
+label{
+    font-size: 15px;
+    font-weight: 500;
+}
+
+label.required:after {
+    content: "*";
+    color: red;
+}
+
+.choice-name>label.required:after {
+    content: none;
+}
+
+.choice-name>label, .checkbox-group>label{
+    font-weight: 400;
+}
+
+input, textarea{
+    font-size: 14px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+}
+
+input:hover, textarea:hover{
+    border: 1px solid #8ac8ff;
+}
+
+input:focus, textarea:focus{
+    outline: none;
+    border: 1px solid #8ac8ff;
+    box-shadow: #8ac8ff 0px 0px 5px 0px, #8ac8ff 0px 0px 1px 0px;
+}
+
+button{
+    font-size: 16px;
+    color: #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#supprimer{
+    background-color: red;
+    padding: 5px 10px;
 }
 
 /* ALERTES */
@@ -58,7 +144,10 @@ nav>a, footer>a, footer>p{
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    padding: 8vh 0;
+    background-image: url(/public/images/logo.webp);
+    background-repeat: no-repeat;
+    background-size: 100vw 84vh;
+    background-position: center;
 }
 
 .accueil-container>h1, .accueil-container>h2{
@@ -72,6 +161,75 @@ nav>a, footer>a, footer>p{
     align-items: center;
 }
 
+.presentation-text {
+    width: 60vw;
+    height: 30vh;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    padding: 0 30px;
+}
+
+.presentation-text>h3 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.livre-dor {
+    width: 70vw;
+    height: 20vh;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    padding: 0 30px;
+}
+
+.nom-client{
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+/* NOS FORMULES */
+.formules-container {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    margin: 8vh 0;
+}
+
+.formules-content {
+    width: 80vw;
+    padding: 2vh 0;
+}
+
+.formules {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card {
+    width: 580px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 15px 50px;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    line-height: 2.5;
+}
+
 .img-chien, .img-chat {
     width: 200px;
     height: 200px;
@@ -79,74 +237,36 @@ nav>a, footer>a, footer>p{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    margin: 20px 0;
 }
 
 .img-chien {
-    background-image: url(/assets/img/chien.jpg);
+    background-image: url(/public/images/chien.jpg);
 }
 
 .img-chat {
-    background-image: url(/assets/img/chat.jpg);
+    background-image: url(/public/images/chat.jpg);
 }
 
-.presentation-text {
-    width: 60vw;
-    height: 30vh;
-    background-color: #FFBA08;
-    padding: 50px;
-    border-radius: 50px;
-}
-
-.presentation-text>h3 {
+.tarif{
+    font-size: 16px;
+    font-weight: 600;
     text-align: center;
-}
-
-.livre-dor {
-    width: 70vw;
-    height: 20vh;
-    background-color: #FFBA08;
-    padding: 50px;
-    border-radius: 50px;
-}
-
-/* NOS FORMULES */
-.formules-container {
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 10vh 0;
+    list-style-type: none;
 }
 
 .infos {
-    width: 80vw;
-    height: 40vh;
-    background-color: #FFBA08;
-    padding: 50px;
-    border-radius: 50px;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 15px 50px;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
     margin-top: 5vh;
+    line-height: 2.5;
 }
 
-.infos>h2{
+.infos h2{
     text-align: center;
-}
-
-.formules {
-    width: 80vw;
-    display: flex;
-    justify-content: space-between;
-}
-
-.card {
-    width: 45%;
-    height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #FFBA08;
-    padding: 50px;
-    border-radius: 50px;
 }
 
 /* RESERVATION */
@@ -159,31 +279,27 @@ nav>a, footer>a, footer>p{
 }
 
 .reservation-container>h1{
-    font-size: 45px;
     margin: 40px 0;
 }
 
 .reservation-form-container{
     width: 1200px;
-    height: 1600px;
+    height: 1650px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 20px;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
     margin-bottom: 15vh;
-    background-color: #FFBA08;
+    background-color: #ffffff;
 }
 
 .reservation-form-content{
     width: 1150px;
-    height: 1550px;
+    height: 1600px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
-
-.user-part>h2, .animal-part>h2, .end-part>h2{
-    font-size: 30px;
 }
 
 /* Partie User */
@@ -204,23 +320,17 @@ nav>a, footer>a, footer>p{
     width: 270px;
     display: flex;
     flex-direction: column;
-    font-size: 18px;
-    font-weight: bold;
 }
 
 .long-input-group{
     width: 100%;
     display: flex;
     flex-direction: column;
-    font-size: 18px;
-    font-weight: bold;
 }
 
 .form-input, #reservation_dateDebut, #reservation_dateFin{
     width: 270px;
     height: 35px;
-    font-size: 15px;
-    border-radius: 10px;
     padding: 0 7px;
     margin-top: 5px;
 }
@@ -228,8 +338,6 @@ nav>a, footer>a, footer>p{
 .long-form-input{
     width: 100%;
     height: 35px;
-    font-size: 15px;
-    border-radius: 10px;
     padding: 0 7px;
     margin-top: 5px;
 }
@@ -237,7 +345,7 @@ nav>a, footer>a, footer>p{
 /* Partie Animal */
 .animal-part{
     width: 100%;
-    height: 800px;
+    height: 850px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -259,8 +367,8 @@ nav>a, footer>a, footer>p{
 
 #reservation_animal_type_1, #animal_profil_type_1{
     margin-left: 34px;
-
 }
+
 #reservation_animal_sexe_1, #animal_profil_sexe_1{
     margin-left: 42px;
 }
@@ -273,6 +381,14 @@ nav>a, footer>a, footer>p{
     margin: 5px 0;
 }
 
+#reservation_animal_ordonnance{
+    border: none;
+}
+
+#reservation_animal_ordonnance:focus{
+    box-shadow: none;
+}
+
 .sterilisation-row{
     display: flex;
     align-items: flex-end;
@@ -282,8 +398,6 @@ nav>a, footer>a, footer>p{
     width: 270px;
     display: flex;
     flex-direction: column;
-    font-size: 18px;
-    font-weight: bold;
     margin: 0 169px 0 171px;
 }
 
@@ -301,34 +415,29 @@ nav>a, footer>a, footer>p{
     flex-direction: column;
 }
 
-.chaleurs-group>label, .file-group>label{
-    font-size: 18px;
-    font-weight: bold;
-}
-
 .traitement-group{
     visibility: hidden;
+}
+
+small{
+    font-size: 11px;
 }
 
 .textarea-group{
     width: 100%;
     display: flex;
     flex-direction: column;
-    font-size: 18px;
-    font-weight: bold;
 }
 
 .form-textarea-input{
     width: 50%;
     height: 200px;
-    font-size: 15px;
     padding: 7px;
     margin-top: 5px;
-    border-radius: 10px;
 }
 
 .terms{
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
 }
 
@@ -357,33 +466,33 @@ nav>a, footer>a, footer>p{
 .price-group{
     display: flex;
     align-items: center;
-    font-size: 18px;
-    font-weight: bold;
 }
 
 .price-input{
     width: 100px;
     height: 35px;
-    font-size: 16px;
-    font-weight: bold;
     padding: 0 7px;
     text-align: center;
-    border-radius: 10px;
     margin-left: 10px;
+}
+
+.price-input:hover{
+    border: 1px solid lightgrey;
+}
+
+.price-input:focus{
+    border: 1px solid lightgrey;
+    box-shadow: none;
 }
 
 #reservation_submit, #reservation_annuler, #reservation_valider, #reservation_refuser{
     width: fit-content;
     height: 35px;
-    border-radius: 10px;
-    font-size: 16px;
     padding: 0 10px;
-    font-weight: bold;
-    cursor: pointer;
 }
 
 #reservation_submit{
-    background-color: #3F88C5;
+    background-color: #137edb;
 }
 
 #reservation_annuler{
@@ -412,6 +521,11 @@ nav>a, footer>a, footer>p{
     height: 450px;
 }
 
+iframe{
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+}
+
 .contact-form-container{
     width: 450px;
     height: 450px;
@@ -420,45 +534,39 @@ nav>a, footer>a, footer>p{
     justify-content: space-between;
     align-items: center;
     padding: 30px 40px;
-    background-color: #FFBA08;
-    border-radius: 50px;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    background-color: #ffffff;
 }
 
 .contact-input{
     width: 250px;
     height: 35px;
-    font-size: 16px;
     padding: 5px;
-    border-radius: 10px;
 }
 
 .contact-textarea{
     width: 370px;
     height: 200px;
-    font-size: 16px;
     padding: 5px;
-    border-radius: 10px;
 }
 
 .contact-btn{
     width: 150px;
     height: 35px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 40px;
-    background-color: #3F88C5;
-    cursor: pointer;
+    background-color: #137edb;
 }
 
 .horaires{
     width: 350px;
     height: 450px;
-    background-color: #FFBA08;
+    border: 1px solid lightgrey;
     padding: 30px 0;
-    border-radius: 50px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #ffffff;
 }
 
 .horaires>h2{
@@ -468,10 +576,6 @@ nav>a, footer>a, footer>p{
 .horaires>ul>li{
     line-height: 50px;
     list-style-type: none; 
-}
-
-iframe{
-    border-radius: 50px;
 }
 
 /* CONNEXION / CREER UN COMPTE */
@@ -490,13 +594,9 @@ iframe{
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    background-color: #3F88C5;
-    box-shadow: 0 3px 5px black;
-    border-radius: 50px;
-}
-
-.user-content>h1{
-    font-size: 45px;
+    background-color: #ffffff;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
 }
 
 .register-form{
@@ -522,28 +622,26 @@ iframe{
 .group-input{
     width: 100%;
     font-size: 25px;
-    font-weight: bold;
     text-align: center;
 }
 
 .form-control{
     width: 100%;
     height: 45px;
-    font-size: 20px;
-    padding: 0 15px;
+    padding: 0 5px;
     margin-top: 5px;
-    border-radius: 40px;
 }
 
 .submit-btn{
     width: 100%;
     height: 45px;
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 40px;
-    background-color: #FFBA08;
-    cursor: pointer;
-    margin-top: 10px;
+    color: white;
+    background-color: #137edb;
+    margin: 10px 0;
+}
+
+.alternative{
+    font-size: 12px;
 }
 
 /* MON PROFIL : ACCUEIL */
@@ -573,7 +671,8 @@ iframe{
     width: 350px;
     height: 250px;
     color: black;
-    background-color: #FFBA08;
+    border: 1px solid lightgrey;
+    background-color: #ffffff;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -597,8 +696,9 @@ iframe{
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 20px;
-    background-color: #FFBA08;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    background-color: #ffffff;
 }
 
 .user-form-content{
@@ -609,18 +709,10 @@ iframe{
     justify-content: space-between;
 }
 
-.user-form-content>h2{
-    font-size: 30px;
-}
-
 .user-form-content>.btn{
     width: 270px;
     height: 35px;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    background-color: #3F88C5;
-    cursor: pointer;
+    background-color: #137edb;
 }
 
 /* MON PROFIL : FICHES ANIMAUX */
@@ -636,11 +728,12 @@ iframe{
 .animal-form-container{
     width: 1000px;
     height: 450px;
+    background-color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 20px;
-    background-color: #FFBA08;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
 }
 
 .animal-form-content{
@@ -660,20 +753,14 @@ iframe{
 .profil-textarea-input{
     width: 100%;
     height: 100px;
-    font-size: 15px;
     padding: 7px;
     margin-top: 5px;
-    border-radius: 10px;
 }
 
 .animal-form-content>.btn{
     width: 270px;
     height: 35px;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    background-color: #3F88C5;
-    cursor: pointer;
+    background-color: #137edb;
 }
 
 /* MON PROFIL : MES RESERVATIONS */
@@ -687,7 +774,6 @@ iframe{
 }
 
 .reservation-list-container>h1 {
-    font-size: 45px;
     margin: 20px 0;
 }
 
@@ -696,8 +782,9 @@ iframe{
     height: fit-content;
     display: flex;
     flex-direction: column;
+    border: 1px solid lightgrey;
     border-radius: 10px;
-    background-color: #FFBA08;
+    background-color: #ffffff;
 }
 
 .header-list {
@@ -759,7 +846,7 @@ iframe{
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-    background-color: rgb(203, 203, 203);
+    background-color: #ffffff;
 }
 
 .reservation-list {
@@ -776,7 +863,7 @@ iframe{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: #FBFEF9;
+    background-color: lightgrey;
     border-radius: 5px;
     margin-bottom: 20px;
 }
@@ -786,7 +873,7 @@ iframe{
 }
 
 .en-cours {
-    background-color: rgb(40, 90, 255);
+    background-color: #137edb;
 }
 
 .valider {
@@ -799,4 +886,44 @@ iframe{
 
 .annuler {
     background-color: rgb(255, 40, 40);
+}
+
+/* COMMENTAIRE CLIENT */
+.commentaire-container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.commentaire-form-container{
+    width: 600px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 40px;
+    background-color: #ffffff;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+}
+
+.commentaire-input{
+    width: 250px;
+    height: 35px;
+    padding: 5px;
+}
+
+.commentaire-textarea{
+    width: 500px;
+    height: 200px;
+    padding: 5px;
+}
+
+.commentaire-btn{
+    width: 150px;
+    height: 35px;
+    background-color: #137edb;
 }

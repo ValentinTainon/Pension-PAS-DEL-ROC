@@ -23,6 +23,9 @@
 	<div class="animal-part">
 		<h2>Mon animal</h2>
 		<div class="row">
+			{# {{ form_row(form.animal.selectAnimal) }} #}
+		</div>
+		<div class="row">
 			{{ form_row(form.animal.nom) }}
 			{{ form_row(form.animal.type) }}
 			{{ form_row(form.animal.sexe) }}
@@ -47,11 +50,11 @@
 				{{ form_widget(form.animal.ordonnance) }}
 				<small>{{ form_help(form.animal.ordonnance) }}</small>
 			</div>
-			{# {% if is_granted('ROLE_ADMIN') %}
-					{% for animal in animals %}
-						<a href="{{asset('uploads/ordonnances/' ~ animal.ordonnance )}}" target="_blank" class="doc-file">Voir le fichier</a>
-					{% endfor %}
-				{% endif %} #}
+		{# {% if is_granted('ROLE_ADMIN') %}
+				{% for animal in animals %}
+					<a href="{{asset('uploads/ordonnances/' ~ animal.ordonnance )}}" target="_blank" class="doc-file">Voir le fichier</a>
+				{% endfor %}
+			{% endif %} #}
 		</div>
 		{{ form_row(form.animal.infoSup) }}
 		<p class="terms">Je m'engage :</p>

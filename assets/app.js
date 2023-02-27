@@ -9,7 +9,7 @@
 import './styles/app.css';
 
 // start the Stimulus application
-import './bootstrap';
+// import './bootstrap';
 
 /* RESERVATION FORM */
 /* Manage dateChaleurs input */
@@ -113,7 +113,7 @@ function managePrix() {
     /* Prix */
     let prix_total = prix_choix_formule * duree_sejour;
     let prix_final = prix_total.toFixed(2);
-    prix_sejour.value = prix_final;
+    prix_sejour.value = prix_final + " €";
 }
 
 let choix_type_date = document.querySelectorAll('input[name="reservation[animal][type]"], #reservation_dateDebut, #reservation_dateFin');
@@ -204,16 +204,16 @@ if (allStatus[0]) {
 /* Manage status box / Manage bouton modifier */
 allReservationRow.forEach((element) => {
     if (element.childNodes[7].textContent === "Réservation validée") {
-        element.childNodes[7].style.background = "green";
+        element.childNodes[7].style.background = "rgb(40, 255, 112)";
         element.childNodes[9].style.display = "none";
     } else if (element.childNodes[7].textContent === "Réservation refusée") {
-        element.childNodes[7].style.background = "purple";
+        element.childNodes[7].style.background = "rgb(234, 40, 255)";
         element.childNodes[9].style.display = "none";
     } else if (element.childNodes[7].textContent === "Réservation annulée") {
-        element.childNodes[7].style.background = "red";
+        element.childNodes[7].style.background = "rgb(255, 40, 40)";
         element.childNodes[9].style.display = "none";
     } else {
-        element.childNodes[7].style.background = "blue";
+        element.childNodes[7].style.background = "#137edb";
         element.childNodes[9].style.display = "block";
     }
 })
@@ -231,7 +231,7 @@ allReservationRow.forEach((element) => {
 
     dateFin = new Date(`${annee_dateFin}/${mois_dateFin}/${jour_dateFin}`);
 
-    if (date_now > dateFin) {
+    if (dateFin < date_now) {
         element.childNodes[9].style.display = "none";
         element.childNodes[11].style.display = "block";
     } else {

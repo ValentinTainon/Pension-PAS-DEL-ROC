@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Animal;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,95 +26,120 @@ class AnimalType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            // ->add('selectAnimal', EntityType::class, [
+            //     'class' => Animal::class,
+            //     'choices' => $user->getAnimals(),
+            //     'attr' => ['class' => 'form-input'],
+            //     'label' => false,
+            //     'placeholder' => 'Sélectionner votre animal',
+            //     'required' => false,
+            // ])
             ->add('nom', TextType::class, [
                 'row_attr' => ['class' => 'input-group'],
                 'attr' => ['class' => 'form-input'],
-                'label' => 'Nom*'])
+                'label' => 'Nom'
+            ])
             ->add('type', ChoiceType::class, [
                 'row_attr' => ['class' => 'input-group'],
-                'label' => 'Type*',
+                'attr' => ['class' => 'choice-name'],
+                'label' => 'Type',
                 'choices' => ['Chien' => self::CHIEN, 'Chat' => self::CHAT],
-                'expanded' => true])
+                'expanded' => true
+            ])
             ->add('sexe', ChoiceType::class, [
                 'row_attr' => ['class' => 'input-group'],
-                'label' => 'Sexe*',
+                'attr' => ['class' => 'choice-name'],
+                'label' => 'Sexe',
                 'choices' => ['Mâle' => self::MALE, 'Femelle' => self::FEMELLE],
-                'expanded' => true])
+                'expanded' => true
+            ])
             ->add('race', TextType::class, [
                 'row_attr' => ['class' => 'input-group'],
                 'attr' => ['class' => 'form-input'],
-                'label' => 'Race*'])
+                'label' => 'Race'
+            ])
             ->add('age', TextType::class, [
                 'row_attr' => ['class' => 'input-group'],
                 'attr' => ['class' => 'form-input'],
-                'label' => 'Age*'])
+                'label' => 'Age'
+            ])
             ->add('poids', NumberType::class, [
                 'row_attr' => ['class' => 'input-group'],
                 'attr' => ['class' => 'form-input'],
-                'label' => 'Poids (kg)*'])
+                'label' => 'Poids (kg)'
+            ])
             ->add('numPuce', TextType::class, [
                 'row_attr' => ['class' => 'input-group'],
                 'attr' => ['class' => 'form-input'],
-                'label' => 'Numéro de puce ou de tatouage*',
+                'label' => 'N° de puce ou de tatouage',
                 'constraints' => [
                     new Length([
                         'min' => 6,
                         'minMessage' => 'Le numéro doit comporter au moins {{ limit }} caractères',
                         'max' => 15,
                         'maxMessage' => 'Le numéro doit comporter au maximum {{ limit }} caractères'
-                    ])]
+                    ])
+                ]
             ])
             ->add('sterilisation', ChoiceType::class, [
                 'row_attr' => ['class' => 'sterilisation-input-group'],
-                'label' => 'Stérilisé / Castré ?*',
+                'attr' => ['class' => 'choice-name'],
+                'label' => 'Stérilisé / Castré ?',
                 'choices' => ['Oui' => true, 'Non' => false],
                 'expanded' => true
             ])
             ->add('dateChaleurs', TextType::class, [
-                'label' => 'Date des dernières chaleurs*',
+                'label' => 'Date des dernières chaleurs',
                 'attr' => ['class' => 'form-input datepicker'],
                 'required' => true
             ])
             ->add('medical', ChoiceType::class, [
                 'row_attr' => ['class' => 'input-group'],
-                'label' => 'Traitement médical en cours ?*',
+                'attr' => ['class' => 'choice-name'],
+                'label' => 'Traitement médical en cours ?',
                 'choices' => ['Oui' => true, 'Non' => false],
                 'expanded' => true
             ])
             ->add('ordonnance', FileType::class, [
-                'label' => 'Je transmet l\'ordonnance*',
+                'label' => 'Je transmet l\'ordonnance',
                 'help' => 'Formats de fichier supportés : jpg, jpeg, pdf',
                 'mapped' => false,
                 'required' => true,
                 'constraints' => [new File([
                     'maxSize' => '1024k',
                     'mimeTypes' => [
-                        'application/jpg', 
-                        'application/jpeg', 
-                        'application/pdf'],
-                    'mimeTypesMessage' => 'Veuillez télécharger un document au format valide'])]
-            ])    
+                        'application/jpg',
+                        'application/jpeg',
+                        'application/pdf'
+                    ],
+                    'mimeTypesMessage' => 'Veuillez télécharger un document au format valide'
+                ])]
+            ])
             ->add('infoSup', TextareaType::class, [
                 'row_attr' => ['class' => 'textarea-group'],
                 'label' => 'Informations supplémentaires',
                 'required' => false,
                 'attr' => [
                     'class' => 'form-textarea-input',
-                    'placeholder' => 'Précautions, caractère de l’animal, sociabilité, peurs, phobie, éducation, antécédents de santé, traitement médical en cours etc…']
+                    'placeholder' => 'Précautions, caractère de l’animal, sociabilité, peurs, phobie, éducation, antécédents de santé, traitement médical en cours etc…'
+                ]
             ])
             ->add('vaccins', CheckboxType::class, [
                 'row_attr' => ['class' => 'checkbox-group'],
-                'label' => 'À transmettre le carnet de santé à jour (vaccins, etc...) de mon animal lors de son arrivée*'])
+                'label' => 'À transmettre le carnet de santé à jour (vaccins, etc...) de mon animal lors de son arrivée'
+            ])
             ->add('vermifuge', CheckboxType::class, [
                 'row_attr' => ['class' => 'checkbox-group'],
-                'label' => 'À ce que le traitement vermifuge ait moins de 3 mois durant la période de pension*'])
+                'label' => 'À ce que le traitement vermifuge ait moins de 3 mois durant la période de pension'
+            ])
             ->add('alimentation', CheckboxType::class, [
                 'row_attr' => ['class' => 'checkbox-group'],
-                'required' => false,
-                'label' => 'À fournir l’alimentation de mon animal lors de son arrivée (en quantité suffisante pour la durée du séjour)*'])
+                'label' => 'À fournir l’alimentation de mon animal lors de son arrivée (en quantité suffisante pour la durée du séjour)'
+            ])
             ->add('traitement', CheckboxType::class, [
                 'label' => 'À fournir le traitement adapté de mon animal lors de son arrivée
-                (un supplément tarifaire de 1€ par prise sera appliqué sur place)*']);
+                (un supplément tarifaire de 1€ par prise sera appliqué sur place)'
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

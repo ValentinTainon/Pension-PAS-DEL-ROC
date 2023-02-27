@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Commentaire;
+use App\Form\CommentaireFormType;
+use App\Repository\CommentaireRepository;
 use App\Repository\ReservationRepository;
-use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,22 +39,32 @@ class ProfilController extends AbstractController
         ]);
     }
 
-    #[Route('/avisClient', name: 'app_avisClient', methods: ['GET', 'POST'])]
+    #[Route('/commentaire', name: 'app_commentaire', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
-    public function avisClient(Request $request, UserRepository $userRepository): Response
+    public function commentaire(Request $request, CommentaireRepository $commentaireRepository): Response
     {
         $user = $this->getUser();
-        $form = $this->createForm(AvisClientType::class, ['user' => $user]);
+        $commentaire = new Commentaire;
+        $reservation = $commentaire->getReservation();
+
+        $form = $this->createForm(CommentaireFormType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $userRepository->save($user, true);
+            $dateCreation = (new \DateTime('now'))->format('d-m-Y H:i:s');
+            $commentaireClient = $form->get('commentaire')->getData();
+
+            $commentaire->setUser($user)
+                        ->setReservation($user)
+                        ->setDateCreation($dateCreation)
+                        ->setCommentaire($commentaireClient);
+            $commentaireRepository->save($commentaire, true);
             $this->addFlash('Succès', 'Votre commentaire a été envoyé !');
             return $this->redirectToRoute('app_mesReservations', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('profil/avisClient.html.twig', [
-            'user' => $user,
+        return $this->renderForm('profil/commentaire.html.twig', [
+            'commentaire' => $commentaire,
             'form' => $form,
         ]);
     }

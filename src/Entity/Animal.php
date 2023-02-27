@@ -16,6 +16,9 @@ class Animal
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $selectAnimal = null;
+
     #[ORM\Column(length: 50)]
     private ?string $nom = null;
 
@@ -40,10 +43,10 @@ class Animal
     #[ORM\Column]
     private ?bool $sterilisation = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $dateChaleurs = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?bool $medical = null;
 
     #[ORM\Column(length: 50, nullable: true)]
@@ -52,13 +55,13 @@ class Animal
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $infoSup = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?bool $vaccins = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?bool $vermifuge = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?bool $alimentation = null;
 
     #[ORM\Column(nullable: true)]
@@ -272,6 +275,18 @@ class Animal
 
         return $this;
     }
+    
+    public function getSelectAnimal(): ?string
+    {
+        return $this->selectAnimal;
+    }
+
+    public function setSelectAnimal(?string $selectAnimal): self
+    {
+        $this->selectAnimal = $selectAnimal;
+
+        return $this;
+    }
 
     public function getUser(): ?User
     {
@@ -284,7 +299,7 @@ class Animal
 
         return $this;
     }
-
+    
     /**
      * @return Collection<int, Reservation>
      */
@@ -299,7 +314,6 @@ class Animal
             $this->reservations->add($reservation);
             $reservation->setAnimal($this);
         }
-
         return $this;
     }
 
@@ -311,7 +325,6 @@ class Animal
                 $reservation->setAnimal(null);
             }
         }
-
         return $this;
     }
 }

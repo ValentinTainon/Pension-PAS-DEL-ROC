@@ -28,11 +28,13 @@ class AnimalProfilType extends AbstractType
                 'label' => 'Nom'])
             ->add('type', ChoiceType::class, [
                 'row_attr' => ['class' => 'input-group'],
+                'attr' => ['class' => 'choice-name'],
                 'label' => 'Type',
                 'choices' => ['Chien' => self::CHIEN, 'Chat' => self::CHAT],
                 'expanded' => true])
             ->add('sexe', ChoiceType::class, [
                 'row_attr' => ['class' => 'input-group'],
+                'attr' => ['class' => 'choice-name'],
                 'label' => 'Sexe',
                 'choices' => ['Mâle' => self::MALE, 'Femelle' => self::FEMELLE],
                 'expanded' => true])
@@ -62,6 +64,7 @@ class AnimalProfilType extends AbstractType
                 ])
             ->add('sterilisation', ChoiceType::class, [
                 'row_attr' => ['class' => 'input-group'],
+                'attr' => ['class' => 'choice-name'],
                 'label' => 'Stérilisé / Castré ?',
                 'choices' => ['Oui' => true, 'Non' => false], 
                 'expanded' => true])

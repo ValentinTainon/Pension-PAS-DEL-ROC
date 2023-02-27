@@ -37,6 +37,9 @@ class Reservation
     #[ORM\JoinColumn(nullable: false)]
     private ?Animal $animal = null;
 
+    #[ORM\OneToOne(mappedBy: 'reservation', cascade: ['persist', 'remove'])]
+    private ?Commentaire $commentaire = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -122,6 +125,28 @@ class Reservation
     public function setAnimal(?Animal $animal): self
     {
         $this->animal = $animal;
+
+        return $this;
+    }
+
+    public function getCommentaire(): ?Commentaire
+    {
+        return $this->commentaire;
+    }
+
+    public function setCommentaire(?Commentaire $commentaire): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($commentaire === null && $this->commentaire !== null) {
+            $this->commentaire->setReservation(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($commentaire !== null && $commentaire->getReservation() !== $this) {
+            $commentaire->setReservation($this);
+        }
+
+        $this->commentaire = $commentaire;
 
         return $this;
     }

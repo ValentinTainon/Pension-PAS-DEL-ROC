@@ -10,7 +10,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 class UserType extends AbstractType
 {
@@ -20,16 +19,19 @@ class UserType extends AbstractType
             ->add('nom', TextType::class, [
                 'row_attr' => ['class' => 'input-group'],
                 'attr' => ['class' => 'form-input'],
-                'label' => 'Nom*'])
+                'label' => 'Nom'
+            ])
             ->add('prenom', TextType::class, [
                 'row_attr' => ['class' => 'input-group'],
                 'attr' => ['class' => 'form-input'],
-                'label' => 'Prénom*'])
+                'label' => 'Prénom'
+            ])
             ->add('adresse', TextType::class, [
                 'row_attr' => ['class' => 'long-input-group'],
                 'attr' => ['class' => 'long-form-input'],
                 'label' => 'Adresse',
-                'required' => false])
+                'required' => false
+            ])
             ->add('codePostal', NumberType::class, [
                 'row_attr' => ['class' => 'input-group'],
                 'attr' => ['class' => 'form-input'],
@@ -41,21 +43,25 @@ class UserType extends AbstractType
                         'minMessage' => 'Votre code postal doit comporter au moins {{ limit }} caractères',
                         'max' => 5,
                         'maxMessage' => 'Votre code postal doit comporter au maximum {{ limit }} caractères'
-                    ])]
-                ])
+                    ])
+                ]
+            ])
             ->add('ville', TextType::class, [
                 'row_attr' => ['class' => 'input-group'],
                 'attr' => ['class' => 'form-input'],
                 'label' => 'Ville',
-                'required' => false])
+                'required' => false
+            ])
             ->add('email', EmailType::class, [
                 'row_attr' => ['class' => 'input-group'],
                 'attr' => ['class' => 'form-input'],
-                'label' => 'Email*'])
+                'label' => 'Email'
+            ])
             ->add('telephone', TextType::class, [
                 'row_attr' => ['class' => 'input-group'],
                 'attr' => ['class' => 'form-input'],
-                'label' => 'Numéro de téléphone*']);
+                'label' => 'Numéro de téléphone'
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
