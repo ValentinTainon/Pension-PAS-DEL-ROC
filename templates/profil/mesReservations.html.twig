@@ -6,6 +6,7 @@
 {% block body %}
 	<div class="reservation-list-container">
 		<h1>Mes Réservations</h1>
+		<a href="{{ path('app_profil') }}" class="retour">Retour</a>
 		<div class="reservation-list-content">
 			{% if is_granted('ROLE_ADMIN') %}
 				<div class="header-list">
@@ -34,9 +35,10 @@
 							<i class="fa-solid fa-star"></i>
 						</a>
 					</div>
+				{% else %}
+					<p>Aucune réservation enregistré</p>
 				{% endfor %}
 			</div>
 		</div>
-		<a href="{{ path('app_profil') }}">Retour</a>
 	</div>
 {% endblock %}

@@ -3,15 +3,16 @@
 {% block title %}Mon Profil{% endblock %}
 
 {% block body %}
-	<div class="animal-container">
+	<div class="animal-container-index">
 		<h1>Fiches Animaux</h1>
-		{% for animal in animals %}
-			{{ animal.nom }}
-			<a href="{{ path('app_animal_edit', {'id': animal.id}) }}">Voir / Modifier</a>
-		{% else %}
-			<p>Aucun animal enregistré</p>
-		{% endfor %}
-		<a href="{{ path('app_animal_new') }}">Ajouter un animal</a>
-		<a href="{{ path('app_profil') }}">Retour</a>
+		<a href="{{ path('app_animal_new') }}" class="ajouter">Créer</a>
+		<div class="animaux-list">
+			{% for animal in animals %}
+				<a href="{{ path('app_animal_edit', {'id': animal.id}) }}">{{ animal.nom }} Voir / Modifier</a>
+			{% else %}
+				<p>Aucun animal enregistré</p>
+			{% endfor %}
+		</div>
+		<a href="{{ path('app_profil') }}" class="retour">Retour</a>
 	</div>
 {% endblock %}

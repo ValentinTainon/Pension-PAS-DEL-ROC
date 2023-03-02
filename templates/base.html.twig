@@ -5,7 +5,6 @@
 		<title>
 			{% block title %}Pas Del Roc{% endblock %}
 		</title>
-
 		{% block stylesheets %}
 			<link rel="preconnect" href="https://fonts.googleapis.com">
 			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,6 +21,10 @@
 	</head>
 
 	<body>
+		{% include "@CHCookieConsent/cookie_consent_styling.html.twig" %}
+        {{ render_esi(path('ch_cookie_consent.show', { 'locale' : 'fr' })) }}
+        {{ render_esi(path('ch_cookie_consent.show_if_cookie_consent_not_set', { 'locale' : app.request.locale })) }}
+
 		{% block menu %}
 			{% include "components/navbar.html.twig" %}
 		{% endblock %}

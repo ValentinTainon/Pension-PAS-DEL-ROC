@@ -4,7 +4,8 @@
 
 {% block body %}
     <div class="user-info-container">
-        <a href="{{ path('app_profil') }}">Retour</a>
+        <h1>Mes informations personnelles</h1>
+        <a href="{{ path('app_profil') }}" class="retour">Retour</a>
         {{ include('user/_form.html.twig') }}
     </div>
 {% endblock %}

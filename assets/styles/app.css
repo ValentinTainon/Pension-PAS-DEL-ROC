@@ -73,6 +73,10 @@ p, li{
     font-size: 14px;
 }
 
+.ui-datepicker{
+    width: 20em;
+}
+
 /* Custom Form */
 label{
     font-size: 15px;
@@ -88,7 +92,7 @@ label.required:after {
     content: none;
 }
 
-.choice-name>label, .checkbox-group>label{
+.choice-name>label, .checkbox-group>label, .traitement-group>label{
     font-weight: 400;
 }
 
@@ -122,10 +126,11 @@ button{
 
 /* ALERTES */
 .alert{
-    width: 100%;
+    width: 100vw;
     position: fixed;
     text-align: center;
     top: 0;
+    left: 0;
 }
 
 .alert-success{
@@ -146,8 +151,7 @@ button{
     align-items: center;
     background-image: url(/public/images/logo.webp);
     background-repeat: no-repeat;
-    background-size: 100vw 84vh;
-    background-position: center;
+    background-size: 100vw 100vh;
 }
 
 .accueil-container>h1, .accueil-container>h2{
@@ -279,7 +283,7 @@ button{
 }
 
 .reservation-container>h1{
-    margin: 40px 0;
+    margin: 20px 0;
 }
 
 .reservation-form-container{
@@ -381,8 +385,10 @@ button{
     margin: 5px 0;
 }
 
-#reservation_animal_ordonnance{
+#reservation_animal_ordonnance, #reservation_animal_ordonnance_help{
+    width: 300px;
     border: none;
+    margin-top: 5px;
 }
 
 #reservation_animal_ordonnance:focus{
@@ -403,7 +409,6 @@ button{
 
 .medical-row{
     width: 711px;
-    height: 68px;
     display: flex;
     justify-content: space-between;
 }
@@ -699,6 +704,7 @@ iframe{
     border: 1px solid lightgrey;
     border-radius: 10px;
     background-color: #ffffff;
+    margin-top: 5px;
 }
 
 .user-form-content{
@@ -716,6 +722,47 @@ iframe{
 }
 
 /* MON PROFIL : FICHES ANIMAUX */
+/* index */
+.animal-container-index{
+    width: 100vw;
+    min-height: 100vh;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 8vh 0;
+}
+
+.animal-container-index h1{
+    margin-bottom: 10vh;
+}
+
+.animaux-list{
+    display: flex;
+    flex-direction: column;
+    margin: 10vh 0;
+    line-height: 3;
+}
+
+.ajouter, .retour{
+    width: 150px;
+    padding: 5px 0;
+    border-radius: 5px;
+    color: #ffffff;
+    text-decoration: none;
+    text-align: center;
+}
+
+.ajouter{
+    background-color: #137edb;
+}
+
+.retour{
+    background-color: #dd8452;
+}
+
+/* new / edit */
 .animal-container{
     width: 100vw;
     height: 100vh;
@@ -734,6 +781,7 @@ iframe{
     align-items: center;
     border: 1px solid lightgrey;
     border-radius: 10px;
+    margin: 5px 0;
 }
 
 .animal-form-content{
@@ -785,6 +833,7 @@ iframe{
     border: 1px solid lightgrey;
     border-radius: 10px;
     background-color: #ffffff;
+    margin-top: 5px;
 }
 
 .header-list {
