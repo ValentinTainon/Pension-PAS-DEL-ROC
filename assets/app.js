@@ -79,9 +79,9 @@ function managePrix() {
     /* choix formule */
     let prix_choix_formule;
     if (input_chien.checked == true) {
-        prix_choix_formule = 20.5;
+        prix_choix_formule = 19;
     } else if (input_chat.checked == true) {
-        prix_choix_formule = 10.55;
+        prix_choix_formule = 16;
     } else {
         prix_choix_formule = 0;
     }

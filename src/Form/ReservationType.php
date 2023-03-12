@@ -27,13 +27,14 @@ class ReservationType extends AbstractType
                 'label' => 'Date et heure de départ',
                 'attr' => ['class' => 'datepicker']])
             ->add('prix', NumberType::class, [
+                'required' => false,
+                'disabled' => true,
                 'row_attr' => ['class' => 'price-group'],
                 'label' => 'Prix',
                 'empty_data' => 0.00,
                 'attr' => [
                     'class' => 'price-input',
-                    'readonly' => true],
-                'required' => false])
+                    'readonly' => true]])
             ->add('submit', SubmitType::class)
             ->add('annuler', SubmitType::class,[
                 'label' => 'Annuler la réservation'])

@@ -5,7 +5,7 @@
 {% block body %}
 <div class="reservation-container">
     <h1>Modifier votre réservation</h1>
-    <a href="{{ path('app_mesReservations') }}">Retour</a>
     {{ include('reservation/_form.html.twig', {'submit_label': 'Enregistrer les modifications'}) }}
+    <a href="{{ path('app_mesReservations') }}" class="retour">Retour</a>
 </div>
 {% endblock %}

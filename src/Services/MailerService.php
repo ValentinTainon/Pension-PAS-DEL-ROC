@@ -13,7 +13,7 @@ class MailerService
     
     public function sendEmail(
         $from = '',
-        $to = 'siteadmin@hotmail.fr',
+        $to = 'pensionpasdelroc@gmail.com',
         $subject = '',
         $content = '',
         ): void{

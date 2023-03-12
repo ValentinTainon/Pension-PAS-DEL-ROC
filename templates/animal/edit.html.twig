@@ -5,8 +5,10 @@
 {% block body %}
 	<div class="animal-container">
 		<h1>Fiches Animaux</h1>
-		<a href="{{ path('app_animal_index') }}" class="retour">Retour</a>
 		{{ include('animal/_form.html.twig', {'button_label': 'Enregistrer les modifications'}) }}
-		{{ include('animal/_delete_form.html.twig') }}
+		<div class="boutons">
+			{{ include('animal/_delete_form.html.twig') }}
+			<a href="{{ path('app_animal_index') }}" class="retour">Retour</a>
+		</div>
 	</div>
 {% endblock %}

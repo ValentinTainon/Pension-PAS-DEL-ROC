@@ -1,30 +1,28 @@
 {# FORMULAIRE RESERVATION #}
 {{ form_start(form, { 'attr' : { 'id': 'reservation-form', 'class': 'reservation-form-container' } }) }}
-<div
-	class="reservation-form-content">
 	{# PARTIE CLIENT #}
 	<div class="user-part">
 		<h2>Informations personnelles</h2>
 		<div class="row">
 			{{ form_row(form.user.nom) }}
 			{{ form_row(form.user.prenom) }}
+			{{ form_row(form.user.email) }}
 		</div>
-		{{ form_row(form.user.adresse) }}
+		<div class="row">
+			{{ form_row(form.user.adresse) }}
+			{{ form_row(form.user.telephone) }}
+		</div>
 		<div class="row">
 			{{ form_row(form.user.codePostal) }}
 			{{ form_row(form.user.ville) }}
-		</div>
-		<div class="row">
-			{{ form_row(form.user.email) }}
-			{{ form_row(form.user.telephone) }}
 		</div>
 	</div>
 	{# PARTIE ANIMAL #}
 	<div class="animal-part">
 		<h2>Mon animal</h2>
-		<div class="row">
-			{# {{ form_row(form.animal.selectAnimal) }} #}
-		</div>
+		{# <div class="row">
+			{{ form_row(form.animal.selectAnimal) }}
+		</div> #}
 		<div class="row">
 			{{ form_row(form.animal.nom) }}
 			{{ form_row(form.animal.type) }}
@@ -85,5 +83,4 @@
 			</div>
 		{% endif %}
 	</div>
-</div>
 {{ form_end(form) }}

@@ -53,7 +53,7 @@ class AnimalProfilType extends AbstractType
             ->add('numPuce', TextType::class, [
                 'row_attr' => ['class' => 'input-group'],
                 'attr' => ['class' => 'form-input'],
-                'label' => 'Numéro de puce ou de tatouage',
+                'label' => 'N° de puce ou de tatouage',
                 'constraints' => [
                     new Length([
                         'min' => 6,

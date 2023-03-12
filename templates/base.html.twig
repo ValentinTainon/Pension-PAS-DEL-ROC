@@ -2,6 +2,8 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>
 			{% block title %}Pas Del Roc{% endblock %}
 		</title>
@@ -22,7 +24,7 @@
 
 	<body>
 		{% include "@CHCookieConsent/cookie_consent_styling.html.twig" %}
-        {{ render_esi(path('ch_cookie_consent.show', { 'locale' : 'fr' })) }}
+        {# {{ render_esi(path('ch_cookie_consent.show', { 'locale' : 'fr' })) }} #}
         {{ render_esi(path('ch_cookie_consent.show_if_cookie_consent_not_set', { 'locale' : app.request.locale })) }}
 
 		{% block menu %}
