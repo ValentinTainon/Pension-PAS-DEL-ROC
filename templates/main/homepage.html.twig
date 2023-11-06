@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="accueil-container">
+		<div class="up">
+			<h1>Pas Del Roc</h1>
+			<h2>élevage • pension • éducation</h2>
+			<div class="up-content">
+				<img class="logo" src="{{ asset('images/logo.png') }}" alt="Logo de la pension Pas Del Poc">
+				<iframe src="https://www.youtube.com/embed/wNjIAbuWzk0" title="Vidéo présentation Pension PAS DEL ROC" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+			</div>
+		</div>
+		{# Espace commentaires clients #}
+		<div class="down">
+			<a class="commentaire-link" href="{{path('app_commentaire_form')}}"><i class="fa-solid fa-arrow-right"></i> Déjà client ? Laissez nous un commentaire ! <i class="fa-solid fa-arrow-left"></i></a>
+			{% if commentaires %}
+				<div class="commentaire-box">
+					{% for commentaire in commentaires %}
+						<div class="commentaire-content">
+							<p class="nom-client">{{ commentaire.autheur }} le {{ commentaire.dateCreation|date('d/m/Y à H:i:s') }}</p>
+							<p class="description">{{ commentaire.message }}</p>
+						</div>
+					{% endfor %}
+				</div>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

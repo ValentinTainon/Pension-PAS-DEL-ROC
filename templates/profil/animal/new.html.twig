@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PAS DEL ROC - Mes Animaux{% endblock %}
+
+{% block body %}
+	<div class="animal-container">
+		<h2>Nouvel animal</h2>
+		{{ include('profil/animal/_form.html.twig') }}
+		<a href="{{ path('app_animal_index') }}" class="retour">Retour</a>
+	</div>
+{% endblock %}

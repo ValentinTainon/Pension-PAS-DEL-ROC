@@ -1,0 +1,8 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        galerie:
+            uri_prefix: '/uploads/galerie'
+            upload_destination: '%galerie_directory%'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer

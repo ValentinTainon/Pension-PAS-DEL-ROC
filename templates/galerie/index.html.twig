@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PAS DEL ROC - Galerie{% endblock %}
+
+{% block body %}
+	<div class="galerie-container">
+		{% for image in images %}
+			<img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="Image de chien et chat de la galerie">
+		{% else %}
+			<p class="no-content">Pas d'images</p>
+		{% endfor %}
+	</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PAS DEL ROC - Formule Chat{% endblock %}
+
+{% block body %}
+	<div class="formules-container">
+		<div class="card">
+			<h2>Formule Chat</h2>
+			<div class="images-formules-box">
+				<img class="img-chat" src="{{ asset('images/formule-chat/img-1.webp') }}" alt="Photo d'un chat assis au bord de sa fenêtre">
+				<img class="img-chat" src="{{ asset('images/formule-chat/img-2.webp') }}" alt="Photo de l'intérieur d'une chambre pour chat">
+				<img class="img-chat" src="{{ asset('images/formule-chat/img-3.webp') }}" alt="Photo de la terrasse d'une chambre pour chat">
+			</div>
+			<ul>
+				<p>Nous accueillons vos chats durant vos absences tout au long de l'année avec respect et bienveillance :</p>
+				<li>Vos chats sont logés en chambres individuelles dans un bâtiment isolé et chauffé ou climatisé selon la saison.<br>Cependant plusieurs chiens ou chats d’une même famille peuvent séjourner ensemble (recommandé).</li>
+				<li>Chaque chambre est aménagée d’un griffoir, coussins, jouets et des étagères si votre chat aime prendre de la hauteur.</li>
+				<li>Chacune bénéficie d’un accès à sa terrasse couverte pour profiter de l’extérieur.</li>
+				<li>Afin de conserver leurs habitudes alimentaires, l’alimentation de votre animal est à fournir.</li>
+				<li>Nous vous invitons à amener quelques affaires personnelles (panier, jouets) pour qu’il se sente plus rapidement « chez lui ».</li>
+				<li>Votre animal doit être identifié et vacciné pour venir en vacances à la pension.</li>
+				<li>Les visites et les arrivées / départs se font sur rendez-vous aux horaires d'ouverture (voir rubrique "Contact").</li>
+			</ul>
+			<div class="tarifs">
+				<h2>Tarifs journaliers</h2>
+				<table>
+					<tbody>
+						<tr>
+							<td class="left">Pension pour 1 chat</td>
+							<td class="right">14€</td>
+						</tr>
+						<tr>
+							<td class="left">Pension pour 2 chats d’une même famille (partageant la même chambre)</td>
+							<td class="right">24€</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+{% endblock %}

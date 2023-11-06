@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PAS DEL ROC - Formule Chien{% endblock %}
+
+{% block body %}
+	<div class="formules-container">
+		<div class="card">
+			<h2>Formule Chien</h2>
+			<div class="images-formules-box">
+				<img class="img-chien" src="{{ asset('images/formule-chien/img-1.webp') }}" alt="Photo de deux chiens jouant ensembles">
+				<img class="img-chien" src="{{ asset('images/formule-chien/img-2.webp') }}" alt="Photo de deux chiens marchant dans leur enclos">
+				<img class="img-chien" src="{{ asset('images/formule-chien/img-3.webp') }}" alt="Photo d'un chien allongé à l'ombre de son porche">
+				<img class="img-chien" src="{{ asset('images/formule-chien/img-4.webp') }}" alt="Photo des chalets pour chiens vue de haut">
+			</div>
+			<ul>
+				<p>Nous accueillons vos chiens durant vos absences tout au long de l'année avec respect et bienveillance :</p>
+				<li>Ils seront hébergés dans des chalets isolés et mitoyens.</li>
+				<li>Chaque chambre bénéficie d’un accès libre à son jardin, mitoyen avec la chambre voisine pour que votre chien puisse interagir en toute tranquillité.</li>
+				<li>Des parcs de jeux ont été spécialement aménagés pour leur permettre de se dépenser avec nous et avec d’autres pensionnaires, si l’entente le permet.</li>
+				<li>Afin de conserver leurs habitudes alimentaires, l’alimentation de votre animal est à fournir.</li>
+				<li>Nous vous invitons à amener quelques affaires personnelles (panier, jouets) pour qu’il se sente plus rapidement « chez lui ».</li>
+				<li>Vos animaux doivent être identifiés, vaccinés, vermifugés et anti- parasités, pour venir en vacances à la pension.</li>
+				<li>Les visites et les arrivées / départs se font sur rendez-vous aux horaires d'ouverture (voir rubrique "Contact").</li>
+			</ul>
+			<div class="tarifs">
+				<h2>Tarifs journaliers</h2>
+				<table>
+					<tbody>
+						<tr>
+							<td class="left">Pension pour 1 chien</td>
+							<td class="right">19€</td>
+						</tr>
+						<tr>
+							<td class="left">Pension pour 2 chiens d’une même famille (partageant la même chambre)</td>
+							<td class="right">36€</td>
+						</tr>
+						<tr>
+							<td class="left">Garderie chien à la journée<br>(arrivée après 9 h / départ avant 17h)</td>
+							<td class="right">14€</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+{% endblock %}

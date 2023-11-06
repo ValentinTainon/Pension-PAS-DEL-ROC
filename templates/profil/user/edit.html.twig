@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PAS DEL ROC - Mes informations personnelles{% endblock %}
+
+{% block body %}
+    <div class="user-info-container">
+        <h2>Mes informations personnelles</h2>
+        {{ include('profil/user/_form.html.twig') }}
+        <a href="{{ path('app_profil') }}" class="retour button">Retour</a>
+    </div>
+{% endblock %}

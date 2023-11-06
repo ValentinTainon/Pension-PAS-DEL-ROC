@@ -2,70 +2,113 @@
 
 namespace App\Controller;
 
-use App\Entity\Commentaire;
-use App\Form\CommentaireFormType;
-use App\Repository\CommentaireRepository;
-use App\Repository\ReservationRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\User;
+use App\Entity\Animal;
+use App\Form\UserFormType;
+use App\Form\AnimalFormType;
+use App\Repository\UserRepository;
+use App\Repository\AnimalRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
+#[Route('/profil')]
 class ProfilController extends AbstractController
 {
-    #[Route('/profil', name: 'app_profil')]
-    #[IsGranted('ROLE_USER')]
+    #[Route('/', name: 'app_profil')]
     public function index(): Response
     {
-        return $this->render('profil/profil.html.twig');
+        return $this->render('profil/index.html.twig');
     }
 
-    #[Route('/mesReservations', name: 'app_mesReservations')]
-    #[IsGranted('ROLE_USER')]
-    public function mesReservations(ReservationRepository $reservationRepository): Response
+    #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
+    public function delete(Request $request, User $user, UserRepository $userRepository, TokenStorageInterface $tokenStorageInterface): Response
     {
-        $user = $this->getUser();
-
-        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            return $this->render('profil/mesReservations.html.twig', [
-                'reservations' => $reservationRepository->findAll(),
-            ]);
+        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+            $tokenStorageInterface->setToken(null);
+            $userRepository->remove($user, true);
+            $this->addFlash('Succès', 'Votre compte a été supprimé');
+            return $this->redirectToRoute('app_homepage', [], Response::HTTP_SEE_OTHER);
         }
-        return $this->render('profil/mesReservations.html.twig', [
-            'reservations' => $reservationRepository->findBy([
-                'user' => $user,
-            ])
-        ]);
     }
 
-    #[Route('/commentaire', name: 'app_commentaire', methods: ['GET', 'POST'])]
-    #[IsGranted('ROLE_USER')]
-    public function commentaire(Request $request, CommentaireRepository $commentaireRepository): Response
+    #[Route('/user/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
+    public function userEdit(Request $request, User $user, UserRepository $userRepository): Response
     {
-        $user = $this->getUser();
-        $commentaire = new Commentaire;
-        $reservation = $commentaire->getReservation();
-
-        $form = $this->createForm(CommentaireFormType::class);
+        $form = $this->createForm(UserFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $dateCreation = (new \DateTime('now'))->format('d-m-Y H:i:s');
-            $commentaireClient = $form->get('commentaire')->getData();
-
-            $commentaire->setUser($user)
-                        ->setReservation($user)
-                        ->setDateCreation($dateCreation)
-                        ->setCommentaire($commentaireClient);
-            $commentaireRepository->save($commentaire, true);
-            $this->addFlash('Succès', 'Votre commentaire a été envoyé !');
-            return $this->redirectToRoute('app_mesReservations', [], Response::HTTP_SEE_OTHER);
+            $userRepository->save($user, true);
+            $this->addFlash('Succès', 'Vos informations ont été mis à jour !');
+            return $this->redirectToRoute('app_profil', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('profil/commentaire.html.twig', [
-            'commentaire' => $commentaire,
+        return $this->render('profil/user/edit.html.twig', [
+            'user' => $user,
             'form' => $form,
         ]);
+    }
+
+    #[Route('/animal', name: 'app_animal_index', methods: ['GET'])]
+    public function animalIndex(AnimalRepository $animalRepository): Response
+    {
+        $user = $this->getUser();
+        return $this->render('profil/animal/index.html.twig', [
+            'animals' => $animalRepository->findBy([
+                'user' => $user,
+            ]),
+        ]);
+    }
+
+    #[Route('/animal/new', name: 'app_animal_new', methods: ['GET', 'POST'])]
+    public function animalNew(Request $request, AnimalRepository $animalRepository): Response
+    {
+        $user = $this->getUser();
+        $animal = new Animal();
+        $form = $this->createForm(AnimalFormType::class, $animal);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $animal->setUser($user);
+            $animalRepository->save($animal, true);
+
+            return $this->redirectToRoute('app_animal_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('profil/animal/new.html.twig', [
+            'animal' => $animal,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/animal/{id}/edit', name: 'app_animal_edit', methods: ['GET', 'POST'])]
+    public function animalEdit(Request $request, Animal $animal, AnimalRepository $animalRepository): Response
+    {
+        $form = $this->createForm(AnimalFormType::class, $animal);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $animalRepository->save($animal, true);
+
+            return $this->redirectToRoute('app_animal_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('profil/animal/edit.html.twig', [
+            'animal' => $animal,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/animal/{id}', name: 'app_animal_delete', methods: ['POST'])]
+    public function animalDelete(Request $request, Animal $animal, AnimalRepository $animalRepository): Response
+    {
+            if ($this->isCsrfTokenValid('delete' . $animal->getId(), $request->request->get('_token'))) {
+                $animalRepository->remove($animal, true);
+            }
+
+        return $this->redirectToRoute('app_animal_index', [], Response::HTTP_SEE_OTHER);
     }
 }

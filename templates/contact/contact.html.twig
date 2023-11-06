@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Contact{% endblock %}
+{% block title %}PAS DEL ROC - Contact{% endblock %}
 
 {% block body %}
 	<div class="contact-container">
@@ -10,22 +10,23 @@
 			</iframe>
 		</div>
 		{{ form_start(form, { 'attr' : { 'id': 'contact-form', 'class': 'contact-form-container' } }) }}
-			<h2>Écrivez-nous !</h2>
+			<h2>Une question ?</h2>
 			{{ form_row(form.name) }}
 			{{ form_row(form.email) }}
+			{{ form_row(form.objet) }}
 			{{ form_row(form.message) }}
 			{{ form_row(form.submit) }}
 		{{ form_end(form) }}
 		<div class="horaires">
 			<h2>Horaires</h2>
 			<ul>
-				<li>Lundi: 9h-12h 14h-17h</li>
-				<li>Mardi: 9h-12h 14h-17h</li>
-				<li>Mercredi: 9h-12H</li>
-				<li>Jeudi: 9h-12h 14h-17h</li>
-				<li>Vendredi: 9h-12h 14h-17h</li>
-				<li>Samedi: 9h-12h</li>
-				<li>Dimanche: Fermé</li>
+				<li><span>Lundi:</span> 9h-12h 14h-17h</li>
+				<li><span>Mardi:</span> 9h-12h 14h-17h</li>
+				<li><span>Mercredi:</span> 9h-12H</li>
+				<li><span>Jeudi:</span> 9h-12h 14h-17h</li>
+				<li><span>Vendredi:</span> 9h-12h 14h-17h</li>
+				<li><span>Samedi:</span> 9h-12h</li>
+				<li><span>Dimanche:</span> Fermé</li>
 			</ul>
 		</div>
 	</div>

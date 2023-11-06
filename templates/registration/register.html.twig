@@ -1,18 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Créer un compte
-{% endblock %}
+{% block title %}PAS DEL ROC - Créer un compte{% endblock %}
 
 {% block body %}
-	<div class="user-container">
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <div class="user-container">
 		<div class="user-content">
-			<h1>Créer un compte</h1>
+			<h2>Créer un compte</h2>
             {{ form_start(registrationForm, { 'attr' : { 'class': 'register-form' } }) }}
-                {{ form_row(registrationForm.username) }}
-                {{ form_row(registrationForm.email) }}
+                {{ form_row(registrationForm.email, { 'row_attr' : { 'class': 'group-input' }, 'attr' : { 'class': 'form-control' } }) }}
                 {{ form_row(registrationForm.plainPassword) }}
                 <button class="submit-btn" type="submit">Créer un compte</button>
-                <p class="alternative">Vous avez déjà un compte ? <a href="{{path('app_login')}}">Connexion</a></p>
+                <p>Vous avez déjà un compte ? <a class="alternative" href="{{path('app_login')}}">Connexion</a></p>
             {{ form_end(registrationForm) }}
 		</div>
 	</div>

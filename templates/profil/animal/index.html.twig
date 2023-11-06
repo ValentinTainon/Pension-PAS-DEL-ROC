@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PAS DEL ROC - Mes Animaux{% endblock %}
+
+{% block body %}
+	<div class="animal-container-index">
+		<h2>Fiches Animaux</h2>
+		<div class="boutons">
+			<a href="{{ path('app_animal_new') }}" class="ajouter">Créer</a>
+			<a href="{{ path('app_profil') }}" class="retour">Retour</a>
+		</div>
+		<div class="animaux-list">
+			{% for animal in animals %}
+				<a href="{{ path('app_animal_edit', {'id': animal.id}) }}">{{ animal.nom }}<br>Voir / Modifier</a>
+			{% else %}
+				<p class="no-content">Aucun animal enregistré</p>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

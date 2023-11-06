@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PAS DEL ROC - Mes Animaux{% endblock %}
+
+{% block body %}
+	<div class="animal-container">
+		<h2>Voir / Modifier</h2>
+		{{ include('profil/animal/_form.html.twig', {'button_label': 'Enregistrer les modifications'}) }}
+		<div class="boutons">
+			{{ include('profil/animal/_delete_form.html.twig') }}
+			<a href="{{ path('app_animal_index') }}" class="retour">Retour</a>
+		</div>
+	</div>
+{% endblock %}

@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\AnimalRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -15,9 +13,6 @@ class Animal
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
-    #[ORM\Column(length: 50, nullable: true)]
-    private ?string $selectAnimal = null;
 
     #[ORM\Column(length: 50)]
     private ?string $nom = null;
@@ -43,40 +38,19 @@ class Animal
     #[ORM\Column]
     private ?bool $sterilisation = null;
 
-    #[ORM\Column(length: 50, nullable: true)]
-    private ?string $dateChaleurs = null;
-
     #[ORM\Column(nullable: true)]
     private ?bool $medical = null;
-
-    #[ORM\Column(length: 50, nullable: true)]
-    private ?string $ordonnanceFile = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $infoSup = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?bool $vaccins = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?bool $vermifuge = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?bool $alimentation = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?bool $traitement = null;
-
     #[ORM\ManyToOne(inversedBy: 'animals')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete:"CASCADE")]
     private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'animal', targetEntity: Reservation::class)]
-    private Collection $reservations;
-
-    public function __construct()
+    public function __toString()
     {
-        $this->reservations = new ArrayCollection();
+        return $this->nom;
     }
 
     public function getId(): ?int
@@ -180,18 +154,6 @@ class Animal
         return $this;
     }
 
-    public function getDateChaleurs(): ?string
-    {
-        return $this->dateChaleurs;
-    }
-
-    public function setDateChaleurs(string $dateChaleurs): self
-    {
-        $this->dateChaleurs = $dateChaleurs;
-
-        return $this;
-    }
-
     public function isMedical(): ?bool
     {
         return $this->medical;
@@ -200,18 +162,6 @@ class Animal
     public function setMedical(bool $medical): self
     {
         $this->medical = $medical;
-
-        return $this;
-    }
-
-    public function getOrdonnanceFile(): ?string
-    {
-        return $this->ordonnanceFile;
-    }
-
-    public function setOrdonnanceFile(?string $ordonnanceFile): self
-    {
-        $this->ordonnanceFile = $ordonnanceFile;
 
         return $this;
     }
@@ -228,66 +178,6 @@ class Animal
         return $this;
     }
 
-    public function isVaccins(): ?bool
-    {
-        return $this->vaccins;
-    }
-
-    public function setVaccins(bool $vaccins): self
-    {
-        $this->vaccins = $vaccins;
-
-        return $this;
-    }
-
-    public function isVermifuge(): ?bool
-    {
-        return $this->vermifuge;
-    }
-
-    public function setVermifuge(bool $vermifuge): self
-    {
-        $this->vermifuge = $vermifuge;
-
-        return $this;
-    }
-
-    public function isAlimentation(): ?bool
-    {
-        return $this->alimentation;
-    }
-
-    public function setAlimentation(bool $alimentation): self
-    {
-        $this->alimentation = $alimentation;
-
-        return $this;
-    }
-
-    public function isTraitement(): ?bool
-    {
-        return $this->traitement;
-    }
-
-    public function setTraitement(?bool $traitement): self
-    {
-        $this->traitement = $traitement;
-
-        return $this;
-    }
-    
-    public function getSelectAnimal(): ?string
-    {
-        return $this->selectAnimal;
-    }
-
-    public function setSelectAnimal(?string $selectAnimal): self
-    {
-        $this->selectAnimal = $selectAnimal;
-
-        return $this;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -297,34 +187,6 @@ class Animal
     {
         $this->user = $user;
 
-        return $this;
-    }
-    
-    /**
-     * @return Collection<int, Reservation>
-     */
-    public function getReservations(): Collection
-    {
-        return $this->reservations;
-    }
-
-    public function addReservation(Reservation $reservation): self
-    {
-        if (!$this->reservations->contains($reservation)) {
-            $this->reservations->add($reservation);
-            $reservation->setAnimal($this);
-        }
-        return $this;
-    }
-
-    public function removeReservation(Reservation $reservation): self
-    {
-        if ($this->reservations->removeElement($reservation)) {
-            // set the owning side to null (unless already changed)
-            if ($reservation->getAnimal() === $this) {
-                $reservation->setAnimal(null);
-            }
-        }
         return $this;
     }
 }

@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="livre-d-or-container">
+		<div class="commentaire-container-view">
+			<div class="livre-d-or-box">
+				<h2>Livre d'or</h2>
+				<a class="commentaire-link" href="{{path('app_commentaire_form')}}"><i class="fa-solid fa-arrow-right"></i> Déjà client ? Laissez nous un commentaire ! <i class="fa-solid fa-arrow-left"></i></a>
+				<div class="commentaires">
+					{% if commentaires %}
+						{% for commentaire in commentaires %}
+							<div class="commentaire">
+								<p class="nom-client">{{ commentaire.autheur }} le {{ commentaire.dateCreation|date('d/m/Y à H:i:s') }}</p>
+								<p class="description">{{ commentaire.message }}</p>
+							</div>
+						{% endfor %}
+					{% else %}
+						<p class="no-content">Pas de commentaires</p>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PAS DEL ROC - Mon Profil{% endblock %}
+
+{% block body %}
+	<div class="profil-container">
+		{% if app.user.prenom is not null %}
+			<h2>Bienvenue {{ app.user.prenom }}</h2>
+		{% endif %}
+		<div class="cards-container">
+			<a class="profil-link" href="{{ path('app_user_edit', {'id': app.user.id}) }}">
+				<div class="profil-card">
+					<i class="fa-solid fa-user"></i>
+					<h2>Informations Personnelles</h2>
+					<p>Compléter et modifier mes informations personnelles</p>
+				</div>
+			</a>
+			<a class="profil-link" href="{{ path('app_animal_index', {'id' : app.user.id}) }}">
+				<div class="profil-card">
+					<i class="fa-solid fa-paw"></i>
+					<h2>Fiches Animaux</h2>
+					<p>Compléter et modifier les informations de mes animaux</p>
+				</div>
+			</a>
+		</div>
+
+		<a class="logout" href="{{path('app_logout')}}">Déconnexion</a>
+
+		{{ include('profil/user/_delete_form.html.twig') }}
+	</div>
+{% endblock %}

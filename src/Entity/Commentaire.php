@@ -14,67 +14,82 @@ class Commentaire
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'commentaires')]
-    private ?User $user = null;
-
-    #[ORM\Column(length: 20)]
-    private ?string $dateCreation = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $dateCreation = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $commentaire = null;
+    private ?string $message = null;
 
-    #[ORM\OneToOne(inversedBy: 'commentaire', cascade: ['persist', 'remove'])]
-    private ?Reservation $reservation = null;
+    #[ORM\Column(nullable: true)]
+    private ?bool $isValidated = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $autheur = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $email = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    public function getReservation(): ?Reservation
-    {
-        return $this->reservation;
-    }
-
-    public function setReservation(?Reservation $reservation): self
-    {
-        $this->reservation = $reservation;
-
-        return $this;
-    }
-
-    public function getDateCreation(): ?string
+    public function getDateCreation(): ?\DateTimeInterface
     {
         return $this->dateCreation;
     }
 
-    public function setDateCreation(string $dateCreation): self
+    public function setDateCreation(\DateTimeInterface $dateCreation): self
     {
         $this->dateCreation = $dateCreation;
 
         return $this;
     }
 
-    public function getCommentaire(): ?string
+    public function getMessage(): ?string
     {
-        return $this->commentaire;
+        return $this->message;
     }
 
-    public function setCommentaire(string $commentaire): self
+    public function setMessage(string $message): self
     {
-        $this->commentaire = $commentaire;
+        $this->message = $message;
+
+        return $this;
+    }
+
+    public function isIsValidated(): ?bool
+    {
+        return $this->isValidated;
+    }
+
+    public function setIsValidated(bool $isValidated): static
+    {
+        $this->isValidated = $isValidated;
+
+        return $this;
+    }
+
+    public function getAutheur(): ?string
+    {
+        return $this->autheur;
+    }
+
+    public function setAutheur(string $autheur): static
+    {
+        $this->autheur = $autheur;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): static
+    {
+        $this->email = $email;
 
         return $this;
     }

@@ -1,52 +1,43 @@
 <nav role="navigation" class="menu">
-	<a href="{{path('app_main')}}">
-		<i class="fa-solid fa-house"></i>
-	</a>
-	<a href="{{path('app_formules')}}">Nos formules</a>
-	<a href="{{path('app_reservation_new')}}">Réservation</a>
-	<a href="{{path('app_contact')}}">Contact</a>
-	{% if app.user %}
-		<a href="{{path('app_profil', {'id' : app.user.id})}}">Mon Profil</a>
-		<a href="{{path('app_logout')}}">Déconnexion</a>
-	{% else %}
-		<a href="{{path('app_login')}}">Connexion</a>
-		<a href="{{path('app_register')}}">Créer un compte</a>
+	<a class="lien-nav home" href="{{path('app_homepage')}}"><i class="fa-solid fa-house static"></i><i class="fa-solid fa-house fa-bounce"></i></a>
+	<div class="anim-box">
+		<p class="anim-link">Formules</p>
+		<div class="formules-box">
+			<a class="lien-nav" href="{{path('app_formule_chien')}}">Formule Chien <i class="fa-solid fa-paw fa-bounce"></i></a>
+			<a class="lien-nav" href="{{path('app_formule_chat')}}">Formule Chat <i class="fa-solid fa-paw fa-bounce"></i></a>
+		</div>
+	</div>
+	<a class="lien-nav space" href="{{path('app_galerie')}}">Galerie <i class="fa-solid fa-paw fa-bounce"></i></a>
+	<a class="lien-nav" href="{{path('app_education')}}">Éducation <i class="fa-solid fa-paw fa-bounce"></i></a>
+	<a class="lien-nav" href="{{path('app_livre_d_or')}}">Livre d'or <i class="fa-solid fa-paw fa-bounce"></i></a>
+	<a class="lien-nav" href="{{path('app_contact')}}">Contact <i class="fa-solid fa-paw fa-bounce"></i></a>
+	{% if is_granted('ROLE_ADMIN') %}
+		<a class="lien-nav" href="{{path('admin')}}">Administration <i class="fa-solid fa-user fa-bounce"></i></a>
+	{# {% elseif is_granted('ROLE_USER') and not is_granted('ROLE_ADMIN') %}
+		<a class="lien-nav" href="{{path('app_profil', {'id' : app.user.id})}}">Mon Profil <i class="fa-solid fa-user fa-bounce"></i></a>
+	{% else %} #}
+		{# <a class="lien-nav" href="{{path('app_login')}}">Connexion <i class="fa-solid fa-user fa-bounce"></i></a> #}
 	{% endif %}
 </nav>
 
 <nav role="navigation" class="menu-burger">
 	<div id="menuToggle">
-		<!--
-		    A fake / hidden checkbox is used as click reciever,
-		    so you can use the :checked selector on it.
-		    -->
 		<input type="checkbox"/>
-
-		<!--
-		    Some spans to act as a hamburger.
-		    
-		    They are acting like a real hamburger,
-		    not that McDonalds stuff.
-		    -->
 		<span></span>
 		<span></span>
 		<span></span>
-
-		<!--
-		    Too bad the menu has to be inside of the button
-		    but hey, it's pure CSS magic.
-		    -->
 		<ul id="menu">
-			<a href="{{path('app_main')}}">Accueil</a>
-			<a href="{{path('app_formules')}}">Nos formules</a>
-			<a href="{{path('app_reservation_new')}}">Réservation</a>
+			<a href="{{path('app_homepage')}}">Accueil</a>
+			<a href="{{path('app_formule_chien')}}">Formule Chien</a>
+			<a href="{{path('app_formule_chat')}}">Formule Chat</a>
+			<a href="{{path('app_galerie')}}">Galerie</a>
+			<a href="{{path('app_education')}}">Éducation</a>
+			<a href="{{path('app_livre_d_or')}}">Livre d'or</a>
 			<a href="{{path('app_contact')}}">Contact</a>
 			{% if app.user %}
 				<a href="{{path('app_profil', {'id' : app.user.id})}}">Mon Profil</a>
-				<a href="{{path('app_logout')}}">Déconnexion</a>
 			{% else %}
 				<a href="{{path('app_login')}}">Connexion</a>
-				<a href="{{path('app_register')}}">Créer un compte</a>
 			{% endif %}
 		</ul>
 	</div>
