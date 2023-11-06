@@ -25,7 +25,7 @@ class MainController extends AbstractController
     }
     
     #[Route('/commentaire', name: 'app_commentaire_form', methods: ['GET', 'POST'])]
-    public function commentaireForm(Request $request, CommentaireRepository $commentaireRepository, MailerInterface $mailer): Response
+    public function commentaireForm(Request $request, CommentaireRepository $commentaireRepository): Response
     {
         $commentaire = new Commentaire();
 
@@ -33,27 +33,26 @@ class MainController extends AbstractController
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-            $dateCreation = (new \DateTime('now'));
-            $autheur = $form->get('autheur')->getData();
-            $emailAutheur = $form->get('email')->getData();
-            $message = $form->get('message')->getData();
+            // $dateCreation = (new \DateTime('now'));
+            // $autheur = $form->get('autheur')->getData();
+            // $emailAutheur = $form->get('email')->getData();
+            // $message = $form->get('message')->getData();
 
-            $commentaire->setDateCreation($dateCreation)
-                        ->setAutheur($autheur)
-                        ->setEmail($emailAutheur)
-                        ->setMessage($message);
+            // $commentaire->setDateCreation($dateCreation)
+            //             ->setAutheur($autheur)
+            //             ->setEmail($emailAutheur)
+            //             ->setMessage($message);
 
-            $commentaireRepository->save($commentaire, true);
+            // $commentaireRepository->save($commentaire, true);
 
             /* Envoi d'un email d'information à PAS DEL ROC  */
-            $email = (new Email())
-            ->from(new Address($emailAutheur, $autheur))
-            ->to(new Address('pensionpasdelroc@gmail.com', 'PAS DEL ROC'))
-            ->priority(Email::PRIORITY_HIGH)
-            ->subject('Pension PAS DEL ROC - ' . $autheur . ' vous a laissé un commentaire')
-            ->text($autheur . ' vous a laissé le commentaire suivant: ' . $message);
+            // $email = (new Email())
+            // ->from(new Address($emailAutheur, $autheur))
+            // ->to(new Address('', 'PAS DEL ROC'))
+            // ->subject('Pension PAS DEL ROC - ' . $autheur . ' vous a laissé un commentaire')
+            // ->text($autheur . ' vous a laissé le commentaire suivant: ' . $message);
             
-            $mailer->send($email);
+            // $mailer->send($email);
 
             $this->addFlash('Succès', 'Votre commentaire a été envoyé pour validation');
 
